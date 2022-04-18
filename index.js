@@ -4,13 +4,17 @@ require("dotenv").config();
 // create an instance of express app
 let app = express();
 
+const adminRoutes = require("./routes/users");
+
 // enable forms
 app.use(express.urlencoded({ extended: false }));
 
+
+
+
+
 async function main() {
-  app.get("/", (req, res) => {
-    res.send("It's alive!");
-  });
+  app.use("/user", adminRoutes);
 }
 
 main();
