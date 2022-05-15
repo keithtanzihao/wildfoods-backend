@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # express session file
-./sessions
+sessions
 
 # nodemon.json file
 .nodemon.json
