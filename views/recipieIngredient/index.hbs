@@ -1,0 +1,48 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div>
+        <h1>Recipie Ingredient Index</h1>
+        <a class="button__index--create" href="recipieIngredient/create">Create</a>
+      </div>
+
+      <table class="baseIndex__table">
+
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>type</th>
+            <th>description</th>
+            <th>recipie_id</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each recipieIngredient}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.type}}</td>
+              <td>{{this.description}}</td>
+              <td>{{this.recipie_id}}</td>
+              <td>
+                <a
+                  class="button__index--edit"
+                  href="/admin/recipieIngredient/{{this.id}}/edit"
+                >Edit</a>
+                <a
+                  class="button__index--delete"
+                  href="/admin/recipieIngredient/{{this.id}}/delete"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

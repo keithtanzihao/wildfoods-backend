@@ -1,0 +1,46 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div>
+        <h1>Gift Index</h1>
+        <a class="button__index--create" href="gift/create">Create</a>
+      </div>
+
+      <table class="baseIndex__table">
+
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>price</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each gift}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.title}}</td>
+              <td>{{this.price}}</td>
+              <td>
+                <a
+                  class="button__index--edit"
+                  href="/admin/gift/{{this.id}}/edit"
+                >Edit</a>
+                <a
+                  class="button__index--delete"
+                  href="/admin/gift/{{this.id}}/delete"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

@@ -1,0 +1,50 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div>
+        <h1>Recipie Index</h1>
+        <a class="button__index--create" href="recipie/create">Create</a>
+      </div>
+
+      <table class="baseIndex__table">
+
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>time_taken</th>
+            <th>difficulty</th>
+            <th>recipie_url</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each recipie}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.title}}</td>
+              <td>{{this.time_taken}}</td>
+              <td>{{this.difficulty}}</td>
+              <td>{{this.recipie_url}}</td>
+              <td>
+                <a
+                  class="button__index--edit"
+                  href="/admin/recipie/{{this.id}}/edit"
+                >Edit</a>
+                <a
+                  class="button__index--delete"
+                  href="/admin/recipie/{{this.id}}/delete"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

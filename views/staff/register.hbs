@@ -1,0 +1,36 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseLogin">
+
+      <div class="baseLogin__ctn">
+        <div class="baseLogin__header">
+          <h1>Staff Register</h1>
+        </div>
+
+        <form method="POST">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+          <input id="uploader" type="hidden" />
+
+          {{{form}}}
+          <input
+            type="submit"
+            value="Register"
+            class="button__index--submit"
+          />
+
+          <input id="uploader" type="hidden" />
+
+        </form>
+
+        <div class="baseLogin__footer">
+          <p>Not a staff yet ? <a href="/admin/login">Staff Login</a></p>
+          <p>Not a user yet ? <a href="/admin/user">User Login</a></p>
+        </div>
+      </div>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

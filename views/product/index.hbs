@@ -1,0 +1,110 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div class="baseIndex__header">
+        <h1>Product Index</h1>
+        <a class="button__index--create" href="product/create">Create</a>
+      </div>
+
+      {{!-- <form method="POST" class="baseIndex__search">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+
+        <div>
+          <label>Title</label>
+          <input type="text" name="title" class="form__input--textNum">
+        </div>
+
+        <div>
+          <label>Category</label>
+          <select name="category_id">
+            {{#each category}}
+              <option value={{id}}>{{title}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div>
+          <label>Classification</label>
+          <select name="classification_id" multiple>
+            {{#each classification}}
+              <option value={{id}}>{{title}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <input type="submit" class="button__index--create" value="Search" />
+      </form> --}}
+
+      <div class="baseIndex__ctn">
+        <table class="baseIndex__table">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>description</th>
+              <th>category_id</th>
+              <th>price</th>
+              <th>weight</th>
+              <th>energy</th>
+              <th>fat</th>
+              <th>saturated_fat</th>
+              <th>carbohydrates</th>
+              <th>sugars</th>
+              <th>fiber</th>
+              <th>protein</th>
+              <th>sodium</th>
+              <th>warning</th>
+              <th>color_theme</th>
+              <th>img_url</th>
+              <th>bg_url</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each product}}
+              <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.category_id}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.weight}}</td>
+                <td>{{this.energy}}</td>
+                <td>{{this.fat}}</td>
+                <td>{{this.saturated_fat}}</td>
+                <td>{{this.carbohydrates}}</td>
+                <td>{{this.sugars}}</td>
+                <td>{{this.fiber}}</td>
+                <td>{{this.protein}}</td>
+                <td>{{this.sodium}}</td>
+                <td>{{this.warning}}</td>
+                <td>{{this.color_theme}}</td>
+                <td><img class="baseIndex__img" src={{this.img_url}} alt=""></td>
+                <td><img class="baseIndex__img" src={{this.bg_url}} alt=""></td>
+                <td>
+                  <a
+                    class="button__index--edit"
+                    href="/admin/cart/add/{{this.id}}"
+                  >Add to cart</a>
+                  <a
+                    class="button__index--edit"
+                    href="/admin/product/{{this.id}}/edit"
+                  >Edit</a>
+                  <a
+                    class="button__index--delete"
+                    href="/admin/product/{{this.id}}/delete"
+                  >Delete</a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

@@ -1,0 +1,48 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div>
+        <h1>Product Ingredient Index</h1>
+        <a class="button__index--create" href="productIngredient/create">Create</a>
+      </div>
+
+      <table class="baseIndex__table">
+
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>title</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each productIngredient}}
+            <tr>
+              <td>
+                {{this.id}}
+              </td>
+              <td>
+                {{this.title}}
+              </td>
+              <td>
+                <a
+                  class="button__index--edit"
+                  href="/admin/productIngredient/{{this.id}}/edit"
+                >Edit</a>
+                <a
+                  class="button__index--delete"
+                  href="/admin/productIngredient/{{this.id}}/delete"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

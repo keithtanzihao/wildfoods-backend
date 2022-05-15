@@ -1,0 +1,48 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div>
+        <h1>Instruction Index</h1>
+        <a class="button__index--create" href="instruction/create">Create</a>
+      </div>
+
+      <table class="baseIndex__table">
+
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>index</th>
+            <th>instruction</th>
+            <th>recipie_id</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each instruction}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.index}}</td>
+              <td>{{this.instruction}}</td>
+              <td>{{this.recipie_id}}</td>
+              <td>
+                <a
+                  class="button__index--edit"
+                  href="/admin/instruction/{{this.id}}/edit"
+                >Edit</a>
+                <a
+                  class="button__index--delete"
+                  href="/admin/instruction/{{this.id}}/delete"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

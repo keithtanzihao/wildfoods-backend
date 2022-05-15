@@ -1,0 +1,52 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div>
+        <h1>Recipie Ingredient Index</h1>
+        <a class="button__index--create" href="media/create">Create</a>
+      </div>
+
+      <table class="baseIndex__table">
+
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>media_url</th>
+            <th>media_url preview</th>
+            <th>product_id</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each media}}
+            <tr>
+              <td>{{this.id}}</td>
+              <td>{{this.media_url}}</td>
+              <td>
+                {{#if this.media_url}}
+                  <img src="{{this.media_url}}" class="" />
+                {{/if}}
+              </td>
+              <td>{{this.product_id}}</td>
+              <td>
+                <a
+                  class="button__index--edit"
+                  href="/admin/media/{{this.id}}/edit"
+                >Edit</a>
+                <a
+                  class="button__index--delete"
+                  href="/admin/media/{{this.id}}/delete"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

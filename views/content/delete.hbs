@@ -1,0 +1,21 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseCreate">
+
+      <div>
+        <h1>Delete Content</h1>
+      </div>
+
+      <form method="POST">
+        <h1>Are you sure you want to delete {{content.title}}</h1>
+        <div>
+          <a class="button__index--delete" href="/admin/content">Cancel</a>
+          <input type="submit" value="Submit" class="button__index--edit" />
+        </div>
+      </form>
+
+    </section>
+  {{/block}}
+
+{{/extends}}

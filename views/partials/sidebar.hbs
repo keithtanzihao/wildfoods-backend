@@ -1,0 +1,28 @@
+<div class="sidebar">
+  <p>Welcome</p>
+  <ul>
+    {{#if staff}}
+      <li class="sidebar__email">Staff: {{staff.email}}</li>
+      <li><a href="/admin/logout">Logout</a></li>
+      <li><a href="">Orders</a></li>
+      <li><a href="/admin/cart">Cart</a></li>
+    {{else}}
+      <li><a href="/admin/login">Staff Login</a></li>
+    {{/if}}
+    
+  </ul>
+
+  <p>Tables</p>
+  <ul>
+    <li><a href="/admin/product">Product</a></li>
+    <li><a href="/admin/category">Category</a></li>
+    <li><a href="/admin/classification">Classification</a></li>
+    <li><a href="/admin/productIngredient">Product Ingredient</a></li>
+    <li><a href="/admin/media">Media</a></li>
+    <li><a href="/admin/content">Content</a></li>
+    <li><a href="/admin/gift">Gift</a></li>
+    <li><a href="/admin/recipie">Recipie</a></li>
+    <li><a href="/admin/instruction">Instruction</a></li>
+    <li><a href="/admin/recipieIngredient">Recipie Ingredient</a></li>
+  </ul>
+</div>
