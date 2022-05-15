@@ -14,42 +14,50 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function (db) {
-  return db.createTable("product_tag", {
-    product_tag_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    product_id: { 
+exports.up = function(db) {
+  return db.createTable("order", {
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    order_date: { type: "datetime", notNull: true },
+    order_ref: { type: "char", length: 100, notNull: true },
+    total_cost: { type: "decimal", notNull: true },
+    quantity: {
+      type:'int',
+      unsigned: true,
+      defaultValue: 0
+    },
+    user_id: { 
       type: "smallint",
       unsigned: true,
       notNull: true,
       foreignKey: {
-        name: "product_tag_product_fk",
-        table: "product",
+        name: "order_user_fk",
+        table: "user",
         rules: {
           onDelete: "CASCADE",
           onUpdate: "RESTRICT"
         },
-        mapping: "product_id"
-      }
+        mapping: "id"
+      } 
     },
-    tag_id: { 
-      type: "smallint", 
+    status_id: { 
+      type: "smallint",
       unsigned: true,
       notNull: true,
       foreignKey: {
-        name: "product_tag_tag_fk",
-        table: "tag",
+        name: "order_status_fk",
+        table: "status",
         rules: {
           onDelete: "CASCADE",
           onUpdate: "RESTRICT"
         },
-        mapping: "tag_id"
-      } 
+        mapping: "id"
+      }
     },
   });
 };
 
-exports.down = function (db) {
-  return db.dropTable("product_tag");
+exports.down = function(db) {
+  return null;
 };
 
 exports._meta = {

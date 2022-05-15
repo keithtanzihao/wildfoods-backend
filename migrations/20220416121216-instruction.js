@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable("instruction", {
-    instruction_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
     index: { type: "smallint", unsigned: true, notNull: true },
     instruction: { type: "text", notNull: true },
     recipie_id: {
@@ -30,7 +30,7 @@ exports.up = function (db) {
           onDelete: "cascade",
           onUpdate: "restrict"
         },
-        mapping: "recipie_id"
+        mapping: "id"
       }
     }
   });

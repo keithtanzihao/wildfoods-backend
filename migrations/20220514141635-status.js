@@ -14,30 +14,15 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function (db) {
-  return db.createTable("content", {
+exports.up = function(db) {
+  return db.createTable("status", {
     id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
     title: { type: "char", length: 50, notNull: true },
-    description: { type: "text", notNull: true },
-    product_id: {
-      type: "smallint",
-      unsigned: true,
-      notNull: true,
-      foreignKey: {
-        name: "product_content_fk",
-        table: "product",
-        rules: {
-          onDelete: "cascade",
-          onUpdate: "restrict"
-        },
-        mapping: "id"
-      }
-    }
   });
 };
 
-exports.down = function (db) {
-  return db.dropTable("content");
+exports.down = function(db) {
+  return db.dropTable("status");
 };
 
 exports._meta = {

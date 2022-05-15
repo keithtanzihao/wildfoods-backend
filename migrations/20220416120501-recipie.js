@@ -16,11 +16,10 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable("recipie", {
-    recipie_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    title: { type: "decimal", notNull: true },
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    title: { type: "char", length: 50, notNull: true },
     time_taken: { type: "smallint", unsigned: true, notNull: true },
     difficulty: { type: "smallint", unsigned: true, notNull: true },
-    image_url: { type: "text", notNull: true },
     recipie_url: { type: "text", notNull: false },
   });
 };

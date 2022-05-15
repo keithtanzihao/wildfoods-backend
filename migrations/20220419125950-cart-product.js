@@ -15,14 +15,19 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function (db) {
-  return db.createTable("product_productIngredient", {
+  return db.createTable("cart", {
     id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    quantity: {
+      type:'int',
+      unsigned: true,
+      defaultValue: 0
+    },
     product_id: { 
       type: "smallint",
-      unsigned: true,
       notNull: true,
+      unsigned: true,
       foreignKey: {
-        name: "product_productIngredient_product_fk",
+        name: "cart_product_fk",
         table: "product",
         rules: {
           onDelete: "CASCADE",
@@ -31,13 +36,13 @@ exports.up = function (db) {
         mapping: "id"
       }
     },
-    productIngredient_id: { 
+    user_id: { 
       type: "smallint",
-      unsigned: true,
       notNull: true,
+      unsigned: true,
       foreignKey: {
-        name: "product_productIngredient_productIngredient_fk",
-        table: "productIngredient",
+        name: "cart_user_id",
+        table: "user",
         rules: {
           onDelete: "CASCADE",
           onUpdate: "RESTRICT"
@@ -45,11 +50,12 @@ exports.up = function (db) {
         mapping: "id"
       } 
     },
+    quantity:  { type: "smallint", unsigned: true, defaultValue: 0 }
   });
 };
 
 exports.down = function (db) {
-  return db.dropTable("product_productIngredient");
+  return db.dropTable("cart");
 };
 
 exports._meta = {

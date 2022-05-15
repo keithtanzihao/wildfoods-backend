@@ -15,15 +15,14 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function (db) {
-  return db.createTable("gift", {
-    gift_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    title: { type: "char", length: 45, notNull: true },
-    price: { type: "decimal", notNull: true },
+  return db.createTable("classification", {
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    title: { type: "char", length: 50, notNull: true },
   });
 };
 
 exports.down = function (db) {
-  return db.dropTable("gift");
+  return db.dropTable("classification");
 };
 
 exports._meta = {

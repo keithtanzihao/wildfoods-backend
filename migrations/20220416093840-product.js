@@ -16,13 +16,13 @@ exports.setup = function (options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable("product", {
-    product_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    title: { type: "char", length: 80, notNull: true },
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    stock: { type: "decimal", notNull: true },
+    title: { type: "char", length: 50, notNull: true },
     description: { type: "text", notNull: true },
     price: { type: "decimal", notNull: true },
     weight: { type: "smallint", notNull: true },
-    category: { type: "char", length: 45, notNull: true },
-    energy: { type: "char", length: 10, notNull: true },
+    energy: { type: "char", length: 50, notNull: true },
     fat: { type: "decimal", notNull: true },
     saturated_fat: { type: "decimal", notNull: true },
     carbohydrates: { type: "decimal", notNull: true },
@@ -31,7 +31,9 @@ exports.up = function (db) {
     protein: { type: "decimal", notNull: true },
     sodium: { type: "decimal", notNull: true },
     warning: { type: "text", notNull: false },
-    color_theme: { type: "char", length: 10, defaultValue: "" },
+    color_theme: { type: "char", length: 7, defaultValue: "" },
+    img_url: { type: "text", notNull: true },
+    bg_url: { type: "text", notNull: false },
   });
 };
 

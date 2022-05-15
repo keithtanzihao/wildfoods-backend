@@ -16,9 +16,8 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable("productIngredient", {
-    productIngredient_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    description: { type: "char", length: 45, notNull: true },
-    percentage: { type: "decimal", notNull: true }
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    title: { type: "char", length: 50, notNull: true },
   });
 };
 

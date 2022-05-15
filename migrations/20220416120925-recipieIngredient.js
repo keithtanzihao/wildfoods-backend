@@ -16,8 +16,8 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable("recipieIngredient", {
-    recipieIngredient_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    type: { type: "decimal", notNull: true },
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    type: { type: "char", length: 50, notNull: true },
     description: { type: "text", notNull: true },
     recipie_id: {
       type: "smallint",
@@ -30,7 +30,7 @@ exports.up = function (db) {
           onDelete: "cascade",
           onUpdate: "restrict"
         },
-        mapping: "recipie_id"
+        mapping: "id"
       }
     }
   });

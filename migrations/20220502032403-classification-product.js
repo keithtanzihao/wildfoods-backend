@@ -15,41 +15,42 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function (db) {
-  return db.createTable("product_gift", {
-    product_gift_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+  return db.createTable("classification_product", {
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    classification_id: { 
+      type: "smallint", 
+      unsigned: true,
+      notNull: true,
+      foreignKey: {
+        name: "classification_product_classification_fk",
+        table: "classification",
+        rules: {
+          onDelete: "CASCADE",
+          onUpdate: "RESTRICT"
+        },
+        mapping: "id"
+      } 
+    },
     product_id: { 
       type: "smallint",
-      notNull: true,
       unsigned: true,
+      notNull: true,
       foreignKey: {
-        name: "product_gift_product_fk",
+        name: "classification_product_product_fk",
         table: "product",
         rules: {
           onDelete: "CASCADE",
           onUpdate: "RESTRICT"
         },
-        mapping: "product_id"
+        mapping: "id"
       }
     },
-    gift_id: { 
-      type: "smallint",
-      notNull: true,
-      unsigned: true,
-      foreignKey: {
-        name: "product_gift_gift_fk",
-        table: "gift",
-        rules: {
-          onDelete: "CASCADE",
-          onUpdate: "RESTRICT"
-        },
-        mapping: "gift_id"
-      } 
-    },
+    
   });
 };
 
 exports.down = function (db) {
-  return db.dropTable("product_gift");
+  return db.dropTable("classification_product");
 };
 
 exports._meta = {

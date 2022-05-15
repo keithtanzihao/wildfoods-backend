@@ -15,29 +15,15 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function (db) {
-  return db.createTable("content", {
+  return db.createTable("staff", {
     id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    title: { type: "char", length: 50, notNull: true },
-    description: { type: "text", notNull: true },
-    product_id: {
-      type: "smallint",
-      unsigned: true,
-      notNull: true,
-      foreignKey: {
-        name: "product_content_fk",
-        table: "product",
-        rules: {
-          onDelete: "cascade",
-          onUpdate: "restrict"
-        },
-        mapping: "id"
-      }
-    }
+    email: { type: "char", length: 100, notNull: true },
+    password: { type: "char", length: 100, notNull: true },
   });
 };
 
 exports.down = function (db) {
-  return db.dropTable("content");
+  return db.dropTable("staff");
 };
 
 exports._meta = {

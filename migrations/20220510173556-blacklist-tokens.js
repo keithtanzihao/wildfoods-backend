@@ -14,15 +14,16 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function (db) {
-  return db.createTable("tag", {
-    tag_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
-    description: { type: "char", length: 45, notNull: true },
-  });
+exports.up = function(db) {
+  return db.createTable('blacklisted_tokens', {
+       id: {type:'bigint', primaryKey:true, autoIncrement:true},
+       token: { type: 'string', length:5000},
+       date_created : {type:'date'}
+  })
 };
 
-exports.down = function (db) {
-  return db.dropTable("tag");
+exports.down = function(db) {
+  return null;
 };
 
 exports._meta = {

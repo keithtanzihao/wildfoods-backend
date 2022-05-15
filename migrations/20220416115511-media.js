@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function (db) {
   return db.createTable("media", {
-    media_id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
+    id: { type: "smallint", primaryKey: true, autoIncrement: true, unsigned: true },
     media_url: { type: "text", notNull: true },
     product_id: {
       type: "smallint",
@@ -29,7 +29,7 @@ exports.up = function (db) {
           onDelete: "cascade",
           onUpdate: "restrict"
         },
-        mapping: "product_id"
+        mapping: "id"
       }
     }
   });
