@@ -12,16 +12,6 @@ require("dotenv").config();
 // create an instance of express app
 let app = express();
 
-// let fileStoreConfig = {
-//   ttl: 40,
-//   reapInterval: 20,
-//   cookie: { 
-//     maxAge: 3600000,
-//     secure: false,
-//     httpOnly: true 
-//   }
-// }
-
 app.use(session({
   // store: new FileStore(fileStoreConfig),
   
@@ -144,7 +134,7 @@ async function main() {
 
 main();
 
-app.listen(3001, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server has started");
 });
 
