@@ -37,7 +37,6 @@ wax.setLayoutPath("./views/layouts");
 hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 
 // enable forms
-app.use(express.json());
 
 // Might be a problem not sure
 app.use(express.urlencoded({ extended: false })); 
