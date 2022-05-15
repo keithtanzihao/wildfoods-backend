@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch . --ignore sessions & npm run scss",
-    "scss": "sass --watch public/scss"
+    "scss": "sass --watch public/scss",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
