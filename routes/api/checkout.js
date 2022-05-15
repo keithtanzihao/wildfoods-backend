@@ -67,6 +67,7 @@ router.get("/user/:user_id", async (req, res) => {
   res.status(200).send({
     sessionID: stripeSession.id,
     stripeUrl: stripeSession.url,
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
   });
 });
 
@@ -75,6 +76,9 @@ router.post(
   express.raw({ type: "application/json" }),
   async (req, res) => {
     console.log("executed <----------------- 1");
+
+    console.log(req.body)
+
     let event;
     try {
       event = Stripe.webhooks.constructEvent(
@@ -84,10 +88,14 @@ router.post(
       );
       console.log("executed <----------------- 2");
     } catch (error) {
+      console.log("executed <----------------- 5");
       res.status(406).send({
         error: error.message,
       });
     }
+
+
+
     if (event) {
       console.log("executed <----------------- 3");
       if (event.type == "checkout.session.completed") {
