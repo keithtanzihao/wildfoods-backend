@@ -12,6 +12,9 @@ require("dotenv").config();
 // create an instance of express app
 let app = express();
 
+// Allow cors
+app.use(cors());
+
 app.use(session({
   // store: new FileStore(fileStoreConfig),
   
@@ -32,11 +35,6 @@ app.use(express.static('public'));
 wax.on(hbs.handlebars);
 wax.setLayoutPath("./views/layouts");
 hbs.registerPartials(__dirname + '/views/partials', function (err) {});
-
-// Allow cors
-app.use(cors({
-  credentials: true
-}));
 
 // enable forms
 app.use(express.json());
