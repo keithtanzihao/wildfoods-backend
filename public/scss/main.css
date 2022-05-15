@@ -1,0 +1,430 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.input__ctn {
+  margin-bottom: 0.5rem;
+}
+
+.input__ctn label {
+  font-family: nittiRegular;
+  font-size: 1rem;
+}
+
+.input__div--valid {
+  border: 4px solid black;
+  box-sizing: border-box;
+}
+
+.input__div--invalid {
+  border: 4px solid #F25C59;
+  box-sizing: border-box;
+}
+
+.input__span--valid {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  color: #4FB07D;
+}
+
+.input__span--invalid {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  color: #F25C59;
+}
+
+a {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button__index--create {
+  border: 4px solid black;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-family: nittiBold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0rem 1rem;
+}
+
+.button__index--edit {
+  border: 4px solid black;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-family: nittiBold;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 6rem;
+  text-align: center;
+  background-color: #4FB07D;
+}
+
+.button__index--delete {
+  border: 4px solid black;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-family: nittiBold;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 6rem;
+  text-align: center;
+  background-color: #F25C59;
+}
+
+.button__index--submit {
+  border: 4px solid black;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-family: nittiBold;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 12rem;
+  text-align: center;
+  background-color: #4FB07D;
+}
+
+.button__ingredientCreate--submit {
+  border: 4px solid black;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-family: nittiBold;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #4FB07D;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  border-top: 4px solid black;
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 100%;
+}
+
+.form__ctn {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+form.baseIndex__search {
+  overflow: scroll;
+  display: flex;
+  height: 50vh;
+  width: 100%;
+  background-color: pink;
+}
+
+.form__ctn--search {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 30vw;
+}
+
+.form__input--search {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  border: 4px solid black;
+  box-sizing: border-box;
+  padding: 0.15rem 0.5rem;
+  width: 100%;
+}
+
+.form__success {
+  border: 2px solid #4FB07D;
+}
+
+.form__failure {
+  border: 2px solid #F25C59;
+}
+
+.form__label {
+  font-family: nittiRegular;
+  font-size: 1rem;
+}
+
+.form__input--textNum,
+.form__input--login,
+.form__input--select {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  border: 4px solid black;
+  box-sizing: border-box;
+  padding: 0.15rem 0.5rem;
+  width: 35%;
+}
+
+.form__input--login {
+  font-family: nittiBold;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.navbar {
+  padding: 1rem 2rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 4px solid black;
+  box-sizing: border-box;
+  height: 8vh;
+}
+
+.navbar > h1 {
+  font-family: nittiBold;
+  font-size: 2rem;
+}
+
+.sidebar {
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 92vh;
+}
+
+.sidebar > p {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+}
+
+.sidebar > ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar > ul li {
+  margin-bottom: 0.5rem;
+  padding: 0rem 2rem;
+}
+
+.sidebar > ul li {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  font-size: 1.25rem;
+}
+
+.sidebar > ul > .sidebar__email {
+  font-family: nittiBold;
+  font-size: 1rem;
+  font-size: 1.25rem;
+}
+
+.base {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 4px solid black;
+  box-sizing: border-box;
+  max-width: 80vw;
+  max-height: 92vh;
+}
+
+.base__flash--success,
+.base__flash--error {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  align-self: center;
+  box-sizing: border-box;
+  padding: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.base__flash--success {
+  background-color: #4FB07D;
+}
+
+.base__flash--error {
+  background-color: #F25C59;
+}
+
+.baseIndex,
+.baseCreate {
+  position: relative;
+  overflow: scroll;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.baseIndex > div > h1,
+.baseCreate > div > h1 {
+  font-family: nittiBold;
+  font-size: 2rem;
+}
+
+.baseIndex__header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.baseIndex__ctn {
+  overflow: scroll;
+  border-top: 4px solid black;
+  box-sizing: border-box;
+  padding-bottom: 5rem;
+  width: 80vw;
+}
+
+table.baseIndex__table {
+  overflow: scroll;
+  max-width: 80vw;
+}
+
+.baseIndex__table > thead {
+  background-color: orange;
+}
+
+.baseIndex__table > thead th {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  border: 2px solid black;
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 10vw;
+}
+
+.baseIndex__table > tbody tr td:first-child,
+.baseIndex__table > tbody tr td:last-child {
+  text-align: center;
+}
+
+.baseIndex__table > tbody td {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  border: 2px solid black;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.baseIndex__img {
+  width: 10vw;
+}
+
+.baseLogin {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.baseLogin__ctn {
+  border: 4px solid black;
+  box-sizing: border-box;
+  width: 60vw;
+}
+
+.baseLogin__header > h1 {
+  font-family: nittiBold;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.baseLogin__footer {
+  display: flex;
+  justify-content: center;
+  border-top: 4px solid black;
+  box-sizing: border-box;
+}
+
+.baseLogin__footer > p {
+  font-family: nittiRegular;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+body div:nth-child(2) {
+  display: flex;
+}
+
+@font-face {
+  font-family: "nittiBold";
+  src: url("./vendors/fonts/nitti/Nitti-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "nittiRegular";
+  src: url("./vendors/fonts/nitti/Nitti-Normal.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*# sourceMappingURL=main.css.map */

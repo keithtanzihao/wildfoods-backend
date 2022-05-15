@@ -1,0 +1,85 @@
+// Colors
+$green-color: #4FB07D;
+$red-color: #F25C59;
+
+
+// For testing purposes
+@mixin borders__testing {
+  border: 4px solid black;
+  box-sizing: border-box;
+}
+
+
+// section, header default paddings
+@mixin ctn__base {
+  padding: 1rem 2rem;
+}
+
+
+// h1 variables
+@mixin h1__base {
+  font-family: nittiBold;
+  font-size: 2rem;
+}
+
+@mixin h2__base {
+  font-family: nittiBold;
+  font-size: 1rem;
+}
+
+
+// Button variables
+@mixin button__base {
+  border: 4px solid black;
+  border-radius: 12px;
+  box-sizing: border-box;
+
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-family: nittiBold;
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+
+
+
+// font related mixins
+@mixin label__base {
+  font-family: nittiBold;
+  font-size: 1.25rem;
+}
+
+// Generic input base 
+@mixin input__base {
+  font-family: nittiRegular;
+  font-size: 1rem;
+}
+
+@mixin p__base {
+  font-family: nittiRegular;
+  font-size: 1rem;
+}
+
+
+
+
+// Modal stuff
+@mixin modal__background {
+  position: absolute;
+  // Might fuck up later
+  height: calc(100vh - 64px);
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+// Flash stuff 
+@mixin flash__base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  width: 80vw;
+}

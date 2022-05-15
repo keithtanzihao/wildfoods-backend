@@ -1,0 +1,37 @@
+
+a {
+  display: inline-block;
+  cursor: pointer;
+}
+
+// Admin page buttons
+.button__index--create {
+  @include button__base;
+  margin: 0rem 1rem;
+}
+
+.button__index--edit {
+  @include button__base;
+  width: 6rem;
+  text-align: center;
+  background-color: $green-color;
+}
+
+.button__index--delete {
+  @include button__base;
+  width: 6rem;
+  text-align: center;
+  background-color: $red-color;
+}
+
+.button__index--submit {
+  @include button__base;
+  width: 12rem;
+  text-align: center;
+  background-color: $green-color;
+}
+
+.button__ingredientCreate--submit {
+  @include button__base;
+  background-color: $green-color;
+}

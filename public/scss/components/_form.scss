@@ -1,0 +1,83 @@
+form {
+  // flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  
+  // Remove later
+  border-top: 4px solid black;
+  box-sizing: border-box;
+  
+  padding: 1rem;
+  width: 100%;
+}
+
+.form__ctn {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+
+// ---------------------- Search related forms ----------------------
+
+form.baseIndex__search {
+  overflow: scroll;
+  display: flex;
+  height: 50vh;
+  width: 100%;
+  background-color: pink;
+}
+
+.form__ctn--search {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 30vw;
+}
+
+.form__input--search {
+  @include p__base;
+  border: 4px solid black;
+  box-sizing: border-box;
+  padding: 0.15rem 0.5rem;
+  width: 100%;
+}
+
+// ------------------------------------------------------------------
+
+
+
+.form__success {
+  border: 2px solid $green-color;
+}
+
+.form__failure {
+  border: 2px solid $red-color;
+}
+
+.form__label {
+  @include p__base;
+}
+
+.form__input--textNum,
+.form__input--login,
+.form__input--select {
+  @include p__base;
+  border: 4px solid black;
+  box-sizing: border-box;
+  padding: 0.15rem 0.5rem;
+  width: 35%;
+}
+
+.form__input--login {
+  @include label__base;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+
+
+
+
+
+

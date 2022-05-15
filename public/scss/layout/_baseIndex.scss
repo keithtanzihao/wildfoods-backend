@@ -1,0 +1,129 @@
+.base {
+  position: relative;
+  // overflow: scroll;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  // Might remove later
+  border-right: 4px solid black;
+  box-sizing: border-box;
+
+  max-width: calc(100vw - 20vw);
+  max-height: calc(100vh - 8vh);
+}
+
+.base__flash--success,
+.base__flash--error {
+  @include p__base;
+  align-self: center;
+  box-sizing: border-box;
+  padding: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.base__flash--success {
+  background-color: $green-color;
+}
+
+.base__flash--error {
+  background-color: $red-color;
+}
+
+// ---------- baseIndex stuff ----------
+// header
+.baseIndex,
+.baseCreate {
+  position: relative;
+  overflow: scroll;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.baseIndex > div > h1,
+.baseCreate > div > h1 {
+  @include h1__base;
+}
+
+.baseIndex__header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.baseIndex__ctn {
+  overflow: scroll;
+  border-top: 4px solid black;
+  box-sizing: border-box;
+  padding-bottom: 5rem;
+  width: 80vw;
+}
+
+table.baseIndex__table {
+  overflow: scroll;
+  max-width: calc(100vw - 20vw);
+}
+
+.baseIndex__table > thead {
+  background-color: orange;
+}
+
+.baseIndex__table > thead th {
+  @include p__base;
+  border: 2px solid black;
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 10vw;
+}
+
+.baseIndex__table > tbody tr td:first-child,
+.baseIndex__table > tbody tr td:last-child {
+  text-align: center;
+}
+
+.baseIndex__table > tbody td {
+  @include p__base;
+  border: 2px solid black;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.baseIndex__img {
+  width: 10vw;
+}
+
+// ---------- baseLogin stuff ----------
+
+.baseLogin {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.baseLogin__ctn {
+  @include borders__testing;
+  width: 60vw;
+}
+
+.baseLogin__header > h1 {
+  @include h1__base;
+  padding: 1rem;
+}
+
+.baseLogin__footer {
+  display: flex;
+  justify-content: center;
+  border-top: 4px solid black;
+  box-sizing: border-box;
+}
+
+.baseLogin__footer > p {
+  @include p__base;
+  padding: 1rem;
+}

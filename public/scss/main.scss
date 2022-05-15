@@ -1,0 +1,34 @@
+@import "abstracts";
+@import "bases";
+@import "components";
+@import "layout";
+@import "pages";
+
+
+// Need to chug these bad boys somewhere later
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+body div:nth-child(2) {
+  display: flex;
+}
+
+
+// Gotta refactor this later. 
+// Cant seem to make it work in fonts/_index.scss
+@font-face {
+  font-family: 'nittiBold';
+  src: url('./vendors/fonts/nitti/Nitti-Bold.ttf') ;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nittiRegular';
+  src: url('./vendors/fonts/nitti/Nitti-Normal.ttf') ;
+  font-weight: normal;
+  font-style: normal;
+}

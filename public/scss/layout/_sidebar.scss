@@ -1,0 +1,39 @@
+
+.sidebar {
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: calc(100vh - 8vh);
+}
+
+.sidebar > p {
+  @include p__base;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+}
+ 
+.sidebar > ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar > ul li {
+  margin-bottom: 0.5rem;
+  padding: 0rem 2rem;
+}
+
+.sidebar > ul li {
+  @include p__base;
+  font-size: 1.25rem;
+}
+
+.sidebar > ul > .sidebar__email {
+  @include h2__base;
+  font-size: 1.25rem;
+}
+
+
