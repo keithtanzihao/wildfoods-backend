@@ -107,27 +107,27 @@ app.use(function (err, req, res, next) {
 
 
 async function main() {
-  app.use("/admin", staffRoutes);
-  app.use('/cloudinary', cloudinaryRoutes);
+  app.use("/admin", express.json(), staffRoutes);
+  app.use('/cloudinary', express.json(), cloudinaryRoutes);
 
-  app.use("/admin/product", productRoutes);
-  app.use("/admin/category", categoryRoutes);
-  app.use("/admin/classification", classificationRoutes);
-  app.use("/admin/productIngredient", productIngredientRoutes);
-  app.use("/admin/media", mediaRoutes);
-  app.use("/admin/content", contentRoutes);
-  app.use("/admin/gift", giftRoutes);
-  app.use("/admin/recipie", recipieRoutes);
-  app.use("/admin/instruction", instructionRoutes);
-  app.use("/admin/recipieIngredient", recipieIngredient);
-  app.use("/admin/cart", cartRoutes);
+  app.use("/admin/product", express.json(), productRoutes);
+  app.use("/admin/category", express.json(), categoryRoutes);
+  app.use("/admin/classification", express.json(), classificationRoutes);
+  app.use("/admin/productIngredient", express.json(), productIngredientRoutes);
+  app.use("/admin/media", express.json(), mediaRoutes);
+  app.use("/admin/content", express.json(), contentRoutes);
+  app.use("/admin/gift", express.json(), giftRoutes);
+  app.use("/admin/recipie", express.json(), recipieRoutes);
+  app.use("/admin/instruction", express.json(), instructionRoutes);
+  app.use("/admin/recipieIngredient", express.json(), recipieIngredient);
+  app.use("/admin/cart", express.json(), cartRoutes);
 
 
-  app.use("/category", categoryAPI);
-  app.use("/classification", classificationAPI);
-  app.use("/product", productAPI);
-  app.use("/user", userAPI);
-  app.use("/cart/", cartAPI);
+  app.use("/category", express.json(), categoryAPI);
+  app.use("/classification", express.json(), classificationAPI);
+  app.use("/product", express.json(), productAPI);
+  app.use("/user", express.json(), userAPI);
+  app.use("/cart/", express.json(), cartAPI);
   app.use("/checkout/", checkoutAPI);
 }
 
