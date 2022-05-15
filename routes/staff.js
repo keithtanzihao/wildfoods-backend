@@ -74,7 +74,7 @@ router.post("/login", async (req, res) => {
         require: false,
       });
 
-      if (!staff) {
+      if (!staff.get("password")) {
         req.flash("error", [
           {
             message: `Error: Wrong email/password`,
@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
         ]);
         res.redirect("/admin/login");
       } else {
-        if (staff.get("password") === getHashedPassword(form.data.password)) {
+        if (staff.get("password").trim() === getHashedPassword(form.data.password)) {
           req.session.staff = {
             id: staff.get("id"),
             email: staff.get("email"),
@@ -100,7 +100,7 @@ router.post("/login", async (req, res) => {
         } else {
           req.flash("error", [
             {
-              message: `Error: Wrong email/password`,
+              message: `Error: bruh`,
             },
           ]);
           res.redirect("/admin/login");

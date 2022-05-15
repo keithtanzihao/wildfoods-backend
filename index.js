@@ -22,7 +22,7 @@ app.use(session({
   store: new FileStore(),
   secret: 'wildfoods',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
 }))
 
 // set the view engine
@@ -53,6 +53,7 @@ app.use(function (req, res, next) {
 // Cross site request forgery
 const csurfInstance = csurf();
 app.use(function(req, res, next) {
+  console.log(req.url);
   console.log(req.url.slice(0,7));
   if (req.url.slice(0,7) !== "/admin/") {
     next();
@@ -86,6 +87,7 @@ const productAPI = require("./routes/api/product");
 const userAPI = require("./routes/api/user");
 const cartAPI = require("./routes/api/cart");
 const checkoutAPI = require("./routes/api/checkout");
+// const orderAPI = require("./routes/api/orders");
 
 // Placed csrfToken and session stuff here.
 app.use(function(req,res,next){
@@ -133,7 +135,7 @@ async function main() {
 main();
 
 app.listen(process.env.PORT, () => {
-  console.log("Server has started");
+  console.log("Server has started " + process.env.PORT);
 });
 
 

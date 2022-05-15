@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 const CartServices = require("../../services/cart_services");
 const Stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -46,8 +46,8 @@ router.get("/user/:user_id", async (req, res) => {
     mode: "payment",
 
     // Required parameters
-    success_url: process.env.STRIP_SUCCESS_URL,
-    cancel_url: process.env.STRIP_CANCEL_URL,
+    success_url: process.env.STRIPE_SUCCESS_URL,
+    cancel_url: process.env.STRIPE_CANCEL_URL,
 
     // Optional parameters
     client_reference_id: req.params.user_id,
@@ -72,8 +72,9 @@ router.get("/user/:user_id", async (req, res) => {
 
 router.post(
   "/process_payment",
-  bodyParser.raw({ type: "application/json" }),
+  express.raw({ type: "application/json" }),
   async (req, res) => {
+    console.log("executed <----------------- 1");
     let event;
     try {
       event = Stripe.webhooks.constructEvent(
@@ -81,16 +82,18 @@ router.post(
         req.headers["stripe-signature"],
         process.env.STRIPE_ENDPOINT_SECRET
       );
+      console.log("executed <----------------- 2");
     } catch (error) {
       res.status(406).send({
         error: error.message,
       });
     }
     if (event) {
+      console.log("executed <----------------- 3");
       if (event.type == "checkout.session.completed") {
         let stripeSession = event.data.object;        
         console.log(stripeSession);
-        console.log("--------------------------");
+        console.log("--------------------------4");
       }
       res.send({ received: true });
     } else {
