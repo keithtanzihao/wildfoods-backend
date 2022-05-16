@@ -16,6 +16,9 @@ const {
   csurfErrorMiddleware,
 } = require("./utility/configuration");
 
+const adminRoutes = require("./routes/admin");
+const apiRoutes = require("./routes/api");
+
 let app = express();
 // const csurfInstance = csurf();
 
@@ -74,20 +77,24 @@ app.use(csurfTokenMiddleware);
 app.use(csurfErrorMiddleware);
 
 
-const staffRoutes = require("./routes/staff");
-const cloudinaryRoutes = require('./routes/cloudinary.js')
+// const staffRoutes = require("./routes/admin/staff");
+// const cloudinaryRoutes = require('./routes/admin/cloudinary.js')
 
-const productRoutes = require("./routes/product");
-const categoryRoutes = require("./routes/category");
-const classificationRoutes = require("./routes/classification");
-const productIngredientRoutes = require("./routes/productIngredient");
-const mediaRoutes = require("./routes/media");
-const contentRoutes = require("./routes/content");
-const giftRoutes = require("./routes/gift");
-const recipieRoutes = require("./routes/recipie");
-const instructionRoutes = require("./routes/instruction");
-const recipieIngredient = require("./routes/recipieIngredient");
-const cartRoutes = require("./routes/cart");
+// const productRoutes = require("./routes/admin/product");
+// const categoryRoutes = require("./routes/admin/category");
+// const classificationRoutes = require("./routes/admin/classification");
+// const productIngredientRoutes = require("./routes/admin/productIngredient");
+// const mediaRoutes = require("./routes/admin/media");
+
+// const contentRoutes = require("./routes/admin/content");
+// const giftRoutes = require("./routes/admin/gift");
+// const recipieRoutes = require("./routes/admin/recipie");
+// const instructionRoutes = require("./routes/admin/instruction");
+// const recipieIngredient = require("./routes/admin/recipieIngredient");
+// const cartRoutes = require("./routes/admin/cart");
+
+
+
 
 const categoryAPI = require("./routes/api/category");
 const classificationAPI = require("./routes/api/classification");
@@ -100,28 +107,31 @@ const orderAPI = require("./routes/api/order");
 
 
 async function main() {
-  app.use("/admin", express.json(), staffRoutes);
-  app.use('/cloudinary', express.json(), cloudinaryRoutes);
+  app.use(express.json(), adminRoutes);
+  app.use(apiRoutes);
 
-  app.use("/admin/product", express.json(), productRoutes);
-  app.use("/admin/category", express.json(), categoryRoutes);
-  app.use("/admin/classification", express.json(), classificationRoutes);
-  app.use("/admin/productIngredient", express.json(), productIngredientRoutes);
-  app.use("/admin/media", express.json(), mediaRoutes);
-  app.use("/admin/content", express.json(), contentRoutes);
-  app.use("/admin/gift", express.json(), giftRoutes);
-  app.use("/admin/recipie", express.json(), recipieRoutes);
-  app.use("/admin/instruction", express.json(), instructionRoutes);
-  app.use("/admin/recipieIngredient", express.json(), recipieIngredient);
-  app.use("/admin/cart", express.json(), cartRoutes);
+//   app.use("/admin", express.json(), staffRoutes);
+//   app.use('/cloudinary', express.json(), cloudinaryRoutes);
 
-  app.use("/category", express.json(), categoryAPI);
-  app.use("/classification", express.json(), classificationAPI);
-  app.use("/product", express.json(), productAPI);
-  app.use("/user", express.json(), userAPI);
-  app.use("/cart/", express.json(), cartAPI);
-  app.use("/checkout/", checkoutAPI);
-  app.use("/order/", express.json(), orderAPI);
+//   app.use("/admin/product", express.json(), productRoutes);
+//   app.use("/admin/category", express.json(), categoryRoutes);
+//   app.use("/admin/classification", express.json(), classificationRoutes);
+//   app.use("/admin/productIngredient", express.json(), productIngredientRoutes);
+//   app.use("/admin/media", express.json(), mediaRoutes);
+//   app.use("/admin/content", express.json(), contentRoutes);
+//   app.use("/admin/gift", express.json(), giftRoutes);
+//   app.use("/admin/recipie", express.json(), recipieRoutes);
+//   app.use("/admin/instruction", express.json(), instructionRoutes);
+//   app.use("/admin/recipieIngredient", express.json(), recipieIngredient);
+//   app.use("/admin/cart", express.json(), cartRoutes);
+
+//   app.use("/category", express.json(), categoryAPI);
+//   app.use("/classification", express.json(), classificationAPI);
+//   app.use("/product", express.json(), productAPI);
+//   app.use("/user", express.json(), userAPI);
+//   app.use("/cart/", express.json(), cartAPI);
+//   app.use("/checkout/", checkoutAPI);
+//   app.use("/order/", express.json(), orderAPI);
 }
 
 main();

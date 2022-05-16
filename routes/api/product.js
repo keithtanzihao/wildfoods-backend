@@ -56,6 +56,7 @@ router.get("/category_id/:id", async (req, res) => {
 
 // ProductCarousel.js
 router.get("/category_title/:title", async (req, res) => {
+
   const category = await Category.collection().query(function(qb) {
     qb.where("title", "=", req.params.title);
   })
