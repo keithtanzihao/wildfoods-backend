@@ -86,7 +86,7 @@ const productAPI = require("./routes/api/product");
 const userAPI = require("./routes/api/user");
 const cartAPI = require("./routes/api/cart");
 const checkoutAPI = require("./routes/api/checkout");
-// const orderAPI = require("./routes/api/orders");
+const orderAPI = require("./routes/api/order");
 
 // Placed csrfToken and session stuff here.
 app.use(function(req,res,next){
@@ -129,6 +129,7 @@ async function main() {
   app.use("/user", express.json(), userAPI);
   app.use("/cart/", express.json(), cartAPI);
   app.use("/checkout/", checkoutAPI);
+  app.use("/order/", express.json(), orderAPI);
 }
 
 main();

@@ -15,7 +15,6 @@ router.get("/user/:user_id", async (req, res) => {
 
   let cartItems = await cart.getCart();
 
-  console.log("------ checkpoint 0");
   // Create line items
   let lineItems = [];
   let meta = [];
@@ -99,9 +98,19 @@ router.post(
     if (event) {
       console.log("executed <----------------- 3");
       if (event.type == "checkout.session.completed") {
-        let stripeSession = event.data.object;        
+        let stripeSession = event.data.object; 
+        // Could use this later       
         console.log(stripeSession);
-        console.log("--------------------------4");
+
+        // Just save date as UCT and covert it to SG time when required
+        // Refactor this if ive got time
+        
+        
+        
+
+        
+
+
       }
       res.send({ received: true });
     } else {

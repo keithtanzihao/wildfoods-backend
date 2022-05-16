@@ -121,6 +121,13 @@ const Order = bookshelf.model("Order", {
   }
 })
 
+const Status = bookshelf.model("Status", {
+  tableName: "status",
+  order() {
+    return this.hasMany("Order");
+  }
+})
+
 
 module.exports = {
   Staff,
@@ -139,5 +146,6 @@ module.exports = {
   User,
   Cart,
   BlacklistedToken,
-  Order
+  Order,
+  Status
 };
