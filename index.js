@@ -2,48 +2,76 @@ const express = require("express");
 const hbs = require("hbs");
 const wax = require("wax-on");
 const cors = require("cors");
+const flash = require('connect-flash');
 const session = require('express-session');
-const flash = require('connect-flash'); 
 const FileStore = require('session-file-store')(session);
 const csurf = require("csurf");
 require("dotenv").config();
 
+const { 
+  setSessionOptions,
+  flashMsgMiddleware,
+  csurfMiddleware,
+  csurfTokenMiddleware,
+  csurfErrorMiddleware,
+} = require("./utility/configuration");
+
 let app = express();
-app.use(cors());
-app.use(session({
-  store: new FileStore(),
-  secret: 'wildfoods',
-  resave: false,
-  saveUninitialized: false,
-}))
+// const csurfInstance = csurf();
 
 app.set("view engine", "hbs");
-
 app.use(express.static('public'));
-
 wax.on(hbs.handlebars);
 wax.setLayoutPath("./views/layouts");
-hbs.registerPartials(__dirname + '/views/partials', function (err) {});
+hbs.registerPartials(__dirname + '/views/partials');
 
-app.use(express.urlencoded({ extended: false })); 
 
+// app.use(cors());
+// app.use(session({
+//   store: new FileStore(),
+//   secret: 'wildfoods',
+//   resave: false,
+//   saveUninitialized: false,
+// }))
+// app.use(express.urlencoded({ extended: false }));
+// app.use(flash())
+// app.use(function (req, res, next) {
+//   res.locals.success = req.flash("success");
+//   res.locals.error = req.flash("error");
+//   next();
+// });
+// app.use(function (req, res, next) {
+//   if (req.url.slice(0, 7) !== "/admin/") {
+//     next();
+//   } else {
+//     csurfInstance(req, res, next);
+//   }
+// })
+// app.use(function (req, res, next) {
+//   res.locals.csrfToken = req.csrfToken();
+//   res.locals.staff = req.session.staff;
+//   next();
+// })
+// app.use(function (err, req, res, next) {
+//   if (err && err.code == "EBADCSRFTOKEN") {
+//     console.log("The form has expired / CSRF problem. Please try again");
+//     req.flash('error', 'The form has expired. Please try again');
+//     res.redirect('/admin/login');
+//   } else {
+//     next()
+//   }
+// });
+
+
+
+app.use(cors());
+app.use(session(setSessionOptions()));
+app.use(express.urlencoded({ extended: false }));
 app.use(flash())
-app.use(function (req, res, next) {
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    next();
-}); 
-
-const csurfInstance = csurf();
-app.use(function(req, res, next) {
-  console.log(req.url);
-  console.log(req.url.slice(0,7));
-  if (req.url.slice(0,7) !== "/admin/") {
-    next();
-  } else {
-    csurfInstance(req, res, next);
-  }
-})
+app.use(flashMsgMiddleware);
+app.use(csurfMiddleware)
+app.use(csurfTokenMiddleware);
+app.use(csurfErrorMiddleware);
 
 
 const staffRoutes = require("./routes/staff");
@@ -69,21 +97,7 @@ const cartAPI = require("./routes/api/cart");
 const checkoutAPI = require("./routes/api/checkout");
 const orderAPI = require("./routes/api/order");
 
-app.use(function(req,res,next){
-  res.locals.csrfToken = req.csrfToken();
-  res.locals.staff = req.session.staff;
-  next();
-})
 
-app.use(function (err, req, res, next) {
-  if (err && err.code == "EBADCSRFTOKEN") {
-      console.log("The form has expired / CSRF problem. Please try again");
-      req.flash('error', 'The form has expired. Please try again');
-      res.redirect('/admin/login');
-  } else {
-      next()
-  }
-});
 
 async function main() {
   app.use("/admin", express.json(), staffRoutes);

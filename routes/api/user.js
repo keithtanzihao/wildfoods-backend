@@ -10,6 +10,7 @@ const { getHashedPassword, generateAccessToken, checkIfAuthenticatedJWT } = requ
  * ROUTES ALREADY WORK BUT ILL NEED TO APPLY THEM TO FRONTEND
  */
 
+
 router.post("/register", async (req, res) => {
   const existingUser = await User.query(function (qb) {
     qb.where("email", "=", req.body.email)
@@ -44,7 +45,7 @@ router.post("/login", async (req, res) => {
   });
 
   if (user && user.get("password").trim() === getHashedPassword(req.body.password)) {
-
+    
     let accessToken = generateAccessToken(user.toJSON(), process.env.TOKEN_SECRET, "15m");
     let refreshToken = generateAccessToken(user.toJSON(), process.env.REFRESH_TOKEN_SECRET, "1h");
 
