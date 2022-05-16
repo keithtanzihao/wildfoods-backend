@@ -94,15 +94,13 @@ app.use(csurfErrorMiddleware);
 // const cartRoutes = require("./routes/admin/cart");
 
 
-
-
-const categoryAPI = require("./routes/api/category");
-const classificationAPI = require("./routes/api/classification");
-const productAPI = require("./routes/api/product");
-const userAPI = require("./routes/api/user");
-const cartAPI = require("./routes/api/cart");
-const checkoutAPI = require("./routes/api/checkout");
-const orderAPI = require("./routes/api/order");
+// const categoryAPI = require("./routes/api/category");
+// const classificationAPI = require("./routes/api/classification");
+// const productAPI = require("./routes/api/product");
+// const userAPI = require("./routes/api/user");
+// const cartAPI = require("./routes/api/cart");
+// const checkoutAPI = require("./routes/api/checkout");
+// const orderAPI = require("./routes/api/order");
 
 
 
