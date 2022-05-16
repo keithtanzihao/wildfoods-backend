@@ -1,10 +1,29 @@
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Api user login
 const getHashedPassword = (password) => {
   return crypto.createHash("sha256").update(password).digest("base64"); 
 }
+
 // json web token for api user login 
 const generateAccessToken = (user, secret, expiresIn) => {
   return jwt.sign({
@@ -14,7 +33,6 @@ const generateAccessToken = (user, secret, expiresIn) => {
       expiresIn: expiresIn
   });
 }
-
 
 const checkIfLogin = (req, res, next) => {
   if (req.session.staff) {
@@ -38,7 +56,6 @@ const checkIfAuthenticated = (req, res, next) => {
   }
 }
 
-
 // Authentication middleware for API
 const checkIfAuthenticatedJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -57,8 +74,6 @@ const checkIfAuthenticatedJWT = (req, res, next) => {
       res.sendStatus(401);
   }
 };
-
-
 
 module.exports = {
   getHashedPassword,

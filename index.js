@@ -6,42 +6,27 @@ const session = require('express-session');
 const flash = require('connect-flash'); 
 const FileStore = require('session-file-store')(session);
 const csurf = require("csurf");
-
 require("dotenv").config();
 
-// create an instance of express app
 let app = express();
-
-// Allow cors
 app.use(cors());
-
 app.use(session({
-  // store: new FileStore(fileStoreConfig),
-  
-  // Uncomment if we want ot use session-file-store
   store: new FileStore(),
   secret: 'wildfoods',
   resave: false,
   saveUninitialized: false,
 }))
 
-// set the view engine
 app.set("view engine", "hbs");
 
-// static folder
 app.use(express.static('public'));
 
-// setup wax-on
 wax.on(hbs.handlebars);
 wax.setLayoutPath("./views/layouts");
 hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 
-// enable forms
-
-// Might be a problem not sure
 app.use(express.urlencoded({ extended: false })); 
 
-// Flash
 app.use(flash())
 app.use(function (req, res, next) {
     res.locals.success = req.flash("success");
@@ -49,7 +34,6 @@ app.use(function (req, res, next) {
     next();
 }); 
 
-// Cross site request forgery
 const csurfInstance = csurf();
 app.use(function(req, res, next) {
   console.log(req.url);
@@ -60,8 +44,6 @@ app.use(function(req, res, next) {
     csurfInstance(req, res, next);
   }
 })
-
-
 
 
 const staffRoutes = require("./routes/staff");
@@ -79,7 +61,6 @@ const instructionRoutes = require("./routes/instruction");
 const recipieIngredient = require("./routes/recipieIngredient");
 const cartRoutes = require("./routes/cart");
 
-
 const categoryAPI = require("./routes/api/category");
 const classificationAPI = require("./routes/api/classification");
 const productAPI = require("./routes/api/product");
@@ -88,7 +69,6 @@ const cartAPI = require("./routes/api/cart");
 const checkoutAPI = require("./routes/api/checkout");
 const orderAPI = require("./routes/api/order");
 
-// Placed csrfToken and session stuff here.
 app.use(function(req,res,next){
   res.locals.csrfToken = req.csrfToken();
   res.locals.staff = req.session.staff;
@@ -105,7 +85,6 @@ app.use(function (err, req, res, next) {
   }
 });
 
-
 async function main() {
   app.use("/admin", express.json(), staffRoutes);
   app.use('/cloudinary', express.json(), cloudinaryRoutes);
@@ -121,7 +100,6 @@ async function main() {
   app.use("/admin/instruction", express.json(), instructionRoutes);
   app.use("/admin/recipieIngredient", express.json(), recipieIngredient);
   app.use("/admin/cart", express.json(), cartRoutes);
-
 
   app.use("/category", express.json(), categoryAPI);
   app.use("/classification", express.json(), classificationAPI);

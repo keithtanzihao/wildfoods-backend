@@ -17,7 +17,6 @@ const addScssValidations = function (name, object) {
   return '<div class="form__ctn">' + label + widget + error + "</div>";
 };
 
-
 const addScssValidationsSearch = function (name, object) {
   var label = object.labelHTML(name);
   var error = object.error
@@ -32,7 +31,6 @@ const addScssValidationsSearch = function (name, object) {
   var widget = object.widget.toHTML(name, object);
   return '<div class="form__ctn--search">' + label + widget + error + "</div>";
 };
-
 
 const createProductForm = (category, classification, productIngredient) => {
   return forms.create({
@@ -79,7 +77,7 @@ const createProductForm = (category, classification, productIngredient) => {
       widget: forms.widgets.select({
         classes: ["form__input--select"],
       }),
-      choices: category
+      choices: category,
     }),
     classification: fields.string({
       required: true,
@@ -91,7 +89,7 @@ const createProductForm = (category, classification, productIngredient) => {
       widget: forms.widgets.multipleSelect({
         classes: ["form__input--select"],
       }),
-      choices: classification
+      choices: classification,
     }),
     productIngredient: fields.string({
       required: true,
@@ -103,7 +101,7 @@ const createProductForm = (category, classification, productIngredient) => {
       widget: forms.widgets.multipleSelect({
         classes: ["form__input--select"],
       }),
-      choices: productIngredient
+      choices: productIngredient,
     }),
     price: fields.number({
       required: true,
@@ -248,8 +246,7 @@ const createProductForm = (category, classification, productIngredient) => {
       }),
     }),
   });
-}
-
+};
 
 // router.get("/", checkIfAuthenticated, async (req, res) => {
 //   const allCategory = await Category.fetchAll().map((category) => {
@@ -277,7 +274,7 @@ const createProductForm = (category, classification, productIngredient) => {
 //   searchForm.handle(req, {
 //     success: async (form) => {
 //       if (form.data.title) {
-//         product = product.where("title", "like", "%" + req.query.title + "%") 
+//         product = product.where("title", "like", "%" + req.query.title + "%")
 //       }
 
 //       let searchResult = await product.fetch({
@@ -310,7 +307,6 @@ const createProductForm = (category, classification, productIngredient) => {
 //   });
 // });
 
-
 const searchProductForm = (category, classification, productIngredient) => {
   return forms.create({
     title: fields.string({
@@ -333,7 +329,7 @@ const searchProductForm = (category, classification, productIngredient) => {
       widget: forms.widgets.select({
         classes: ["form__input--search"],
       }),
-      choices: category
+      choices: category,
     }),
     classification: fields.string({
       required: false,
@@ -344,7 +340,7 @@ const searchProductForm = (category, classification, productIngredient) => {
       widget: forms.widgets.multipleSelect({
         classes: ["form__input--search"],
       }),
-      choices: classification
+      choices: classification,
     }),
     productIngredient: fields.string({
       required: false,
@@ -355,7 +351,7 @@ const searchProductForm = (category, classification, productIngredient) => {
       widget: forms.widgets.multipleSelect({
         classes: ["form__input--search"],
       }),
-      choices: productIngredient
+      choices: productIngredient,
     }),
     price: fields.number({
       required: false,
@@ -446,9 +442,7 @@ const searchProductForm = (category, classification, productIngredient) => {
       }),
     }),
   });
-}
-
-
+};
 
 const createRecipieForm = (product) => {
   return forms.create({
@@ -506,12 +500,10 @@ const createRecipieForm = (product) => {
       widget: forms.widgets.multipleSelect({
         classes: ["form__input--select"],
       }),
-      choices: product
+      choices: product,
     }),
   });
-}
-
-
+};
 
 const createCategoryForm = () => {
   return forms.create({
@@ -529,8 +521,6 @@ const createCategoryForm = () => {
   });
 };
 
-
-
 const createClassificationForm = () => {
   return forms.create({
     title: fields.string({
@@ -546,8 +536,6 @@ const createClassificationForm = () => {
     }),
   });
 };
-
-
 
 const createProductIngredientForm = () => {
   return forms.create({
@@ -565,8 +553,6 @@ const createProductIngredientForm = () => {
   });
 };
 
-
-
 const createContentForm = (product) => {
   return forms.create({
     product_id: fields.number({
@@ -579,7 +565,7 @@ const createContentForm = (product) => {
       widget: forms.widgets.select({
         classes: ["form__input--select"],
       }),
-      choices: product
+      choices: product,
     }),
     title: fields.string({
       required: true,
@@ -605,8 +591,6 @@ const createContentForm = (product) => {
     }),
   });
 };
-
-
 
 const createGiftForm = (product) => {
   return forms.create({
@@ -642,12 +626,10 @@ const createGiftForm = (product) => {
       widget: forms.widgets.multipleSelect({
         classes: ["form__input--select"],
       }),
-      choices: product
+      choices: product,
     }),
   });
 };
-
-
 
 const createInstructionForm = (recipie) => {
   return forms.create({
@@ -683,11 +665,10 @@ const createInstructionForm = (recipie) => {
       widget: forms.widgets.select({
         classes: ["form__input--select"],
       }),
-      choices: recipie
+      choices: recipie,
     }),
   });
-}
-
+};
 
 const createRecipieIngredientForm = (recipie) => {
   return forms.create({
@@ -723,11 +704,10 @@ const createRecipieIngredientForm = (recipie) => {
       widget: forms.widgets.select({
         classes: ["form__input--select"],
       }),
-      choices: recipie
+      choices: recipie,
     }),
   });
-}
-
+};
 
 const createLoginForm = () => {
   return forms.create({
@@ -754,8 +734,7 @@ const createLoginForm = () => {
       }),
     }),
   });
-}
-
+};
 
 const createMediaForm = (product) => {
   return forms.create({
@@ -769,7 +748,7 @@ const createMediaForm = (product) => {
       widget: forms.widgets.select({
         classes: ["form__input--select"],
       }),
-      choices: product
+      choices: product,
     }),
 
     media_url: fields.url({
@@ -777,9 +756,8 @@ const createMediaForm = (product) => {
         classes: ["form__input--textNum"],
       }),
     }),
-
   });
-}
+};
 
 const createGetUserForm = (user) => {
   return forms.create({
@@ -793,12 +771,10 @@ const createGetUserForm = (user) => {
       widget: forms.widgets.select({
         classes: ["form__input--select"],
       }),
-      choices: user
+      choices: user,
     }),
-  })
-}
-
-
+  });
+};
 
 module.exports = {
   addScssValidations,
@@ -817,9 +793,8 @@ module.exports = {
   createRecipieIngredientForm,
   createLoginForm,
   createMediaForm,
-  
-  createGetUserForm
-};
 
+  createGetUserForm,
+};
 
 // a478932a290d1ce72c64
