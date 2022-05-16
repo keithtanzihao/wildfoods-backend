@@ -105,6 +105,7 @@ router.post(
 
         // Just convert to Number just in case
         const order = new OrderServices(Number(stripeSession.client_reference_id));
+        const cart = new CartServices(Number(stripeSession.client_reference_id));
 
         // Just save date as UCT and covert it to SG time when required
         // Refactor this if ive got time
@@ -117,6 +118,7 @@ router.post(
             item.product_id,
             item.quantity
           );
+          await cart.removeFromCart(item.product_id);
         }
       }
       res.send({ received: true });
