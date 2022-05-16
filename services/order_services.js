@@ -16,9 +16,6 @@ class OrderServices {
     let total_cost = await orderDataLayer.calculateCost(product_id, quantity);
     let status_id =  await orderDataLayer.getStatusID("PAID");
 
-    // console.log(total_cost);
-    // console.log(status_id);
-
     let orderItem = await orderDataLayer.createOrder(
       order_date,
       order_ref,
@@ -28,7 +25,6 @@ class OrderServices {
       status_id,
       product_id
     );
-
     return orderItem;
   }
 }

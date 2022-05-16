@@ -3,6 +3,7 @@ const router = express.Router();
 // const bodyParser = require('body-parser');
 
 const CartServices = require("../../services/cart_services");
+const OrderServices = require("../../services/order_services");
 const Stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.get("/", async (req, res) => {
@@ -98,37 +99,25 @@ router.post(
     if (event) {
       console.log("executed <----------------- 3");
       if (event.type == "checkout.session.completed") {
-        let stripeSession = event.data.object; 
+        let stripeSession = event.data.object;
         // Could use this later       
         console.log(stripeSession);
+
+        // Just convert to Number just in case
+        const order = new OrderServices(Number(stripeSession.client_reference_id));
 
         // Just save date as UCT and covert it to SG time when required
         // Refactor this if ive got time
         const order_date = new Date();
-        console.log(`order_date: ${order_date}`);
-        console.log("----------------------------------");
 
-        // Order ref
-        console.log(`order_ref: ${stripeSession.id}`);
-        console.log("----------------------------------");
-        
-        // user_id
-        console.log(`user_id: ${stripeSession.client_reference_id}`);
-        console.log("----------------------------------");
-        
-        for (let item of stripeSession.metadata.orders) {
-          // product_id
-          console.log(`product_id: ${item.product_id}`);
-          // quantity
-          console.log(`quantity: ${item.quantity}`);
-          console.log("----------------------------------");
+        for (let item of JSON.parse(stripeSession.metadata.orders)) {
+          await order.addToOrder(
+            stripeSession.id,
+            order_date,
+            item.product_id,
+            item.quantity
+          );
         }
-
-        // Address
-        console.log(`order_ref: ${stripeSession.shipping.address}`);
-        console.log("----------------------------------");
-
-        
       }
       res.send({ received: true });
     } else {

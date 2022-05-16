@@ -13,16 +13,16 @@ router.get("/user/:user_id", async function (req, res) {
   res.status(200).send(orderItems.toJSON());
 });
 
-router.post("/", async function (req, res) {
-  const { order_date, order_ref, quantity, user_id, product_id } = req.body;
-  const order = new OrderServices(user_id);
-  let orderItems = await order.addToOrder(
-    order_ref,
-    order_date,
-    product_id,
-    quantity
-  );
-  res.status(200).send(orderItems.toJSON());
-});
+// router.post("/", async function (req, res) {
+//   const { order_date, order_ref, quantity, user_id, product_id } = req.body;
+//   const order = new OrderServices(user_id);
+//   let orderItems = await order.addToOrder(
+//     order_ref,
+//     order_date,
+//     product_id,
+//     quantity
+//   );
+//   res.status(200).send(orderItems.toJSON());
+// });
 
 module.exports = router;

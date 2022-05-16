@@ -62,8 +62,7 @@ async function createOrder(
     status_id,
     product_id,
   });
-  console.log(orderItem.toJSON());
-  // await orderItem.save();
+  await orderItem.save();
   return orderItem;
 }
 
