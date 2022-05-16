@@ -118,8 +118,11 @@ const Order = bookshelf.model("Order", {
   },
   user() {
     return this.belongsTo("User")
+  },
+  status() {
+    return this.belongsTo("Status");
   }
-})
+ })
 
 const Status = bookshelf.model("Status", {
   tableName: "status",
