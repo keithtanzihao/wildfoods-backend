@@ -14,9 +14,7 @@ router.get("/user/:user_id", async function (req, res) {
 });
 
 router.post("/", async function (req, res) {
-  const { order_ref, quantity, user_id, product_id } = req.body;
-  let order_date = new Date();
-
+  const { order_date, order_ref, quantity, user_id, product_id } = req.body;
   const order = new OrderServices(user_id);
   let orderItems = await order.addToOrder(
     order_ref,

@@ -104,13 +104,31 @@ router.post(
 
         // Just save date as UCT and covert it to SG time when required
         // Refactor this if ive got time
+        const order_date = new Date();
+        console.log(`order_date: ${order_date}`);
+        console.log("----------------------------------");
+
+        // Order ref
+        console.log(`order_ref: ${stripeSession.id}`);
+        console.log("----------------------------------");
         
+        // user_id
+        console.log(`user_id: ${stripeSession.client_reference_id}`);
+        console.log("----------------------------------");
         
-        
+        for (let item of stripeSession.metadata.orders) {
+          // product_id
+          console.log(`product_id: ${item.product_id}`);
+          // quantity
+          console.log(`quantity: ${item.quantity}`);
+          console.log("----------------------------------");
+        }
+
+        // Address
+        console.log(`order_ref: ${stripeSession.shipping.address}`);
+        console.log("----------------------------------");
 
         
-
-
       }
       res.send({ received: true });
     } else {
