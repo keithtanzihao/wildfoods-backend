@@ -26,8 +26,15 @@
   background-color: $red-color;
 }
 
+// Search Stuff
 
-// // ---------- baseLogin stuff ----------
+.base__searchCtn--minMax {
+  display: flex;
+}
+
+
+
+// ---------- baseLogin stuff ----------
 
 .baseLogin {
   position: relative;
@@ -71,8 +78,8 @@
   width: 100%;
 }
 
-.baseIndex div:first-child,
-.baseCreate div:first-child {
+.baseIndex > div:first-child,
+.baseCreate > div:first-child {
   display: flex;
   padding: 2rem;
 }

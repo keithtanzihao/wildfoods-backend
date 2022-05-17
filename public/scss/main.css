@@ -344,6 +344,10 @@ form.baseIndex__search > div {
   background-color: #f84f5a;
 }
 
+.base__searchCtn--minMax {
+  display: flex;
+}
+
 .baseLogin {
   position: relative;
   flex-grow: 1;
@@ -386,8 +390,8 @@ form.baseIndex__search > div {
   width: 100%;
 }
 
-.baseIndex div:first-child,
-.baseCreate div:first-child {
+.baseIndex > div:first-child,
+.baseCreate > div:first-child {
   display: flex;
   padding: 2rem;
 }

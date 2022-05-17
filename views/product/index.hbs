@@ -9,11 +9,11 @@
       </div>
 
       <form method="POST" class="baseIndex__search">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
 
         <div>
           <label>Title</label>
-          <input type="text" name="title" class="form__input--textNum">
+          <input type="text" name="title" class="form__input--textNum" />
         </div>
 
         <div>
@@ -27,7 +27,11 @@
 
         <div>
           <label>Classification</label>
-          <select name="classification_id" class="form__input--textNum" multiple>
+          <select
+            name="classification_id"
+            class="form__input--textNum"
+            multiple
+          >
             {{#each classification}}
               <option value={{id}}>{{title}}</option>
             {{/each}}
@@ -36,13 +40,53 @@
 
         <div>
           <label>Availability</label>
-          <select name="classification_id" class="form__input--textNum" multiple>
-            {{#each classification}}
-              <option value={{id}}>{{title}}</option>
-            {{/each}}
+          <select name="stock" class="form__input--textNum">
+            <option value="Available">Available</option>
+            <option value="No Stock">No Stock</option>
           </select>
         </div>
 
+        <div>
+          <label>Nutrition (Fat) Range</label>
+          <div class="base__searchCtn--minMax">
+            <div>
+              <label>Min</label>
+              <input type="number" name="min_fat" class="form__input--textNum" />
+            </div>
+            <div>
+              <label>Max</label>
+              <input type="number" name="max_fat" class="form__input--textNum" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label>Nutrition (Saturated Fat) Range</label>
+          <div class="base__searchCtn--minMax">
+            <div>
+              <label>Min</label>
+              <input type="number" name="min_sfat" class="form__input--textNum" />
+            </div>
+            <div>
+              <label>Max</label>
+              <input type="number" name="max_sfat" class="form__input--textNum" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label>Nutrition (Carbohydrates) Range</label>
+          <div class="base__searchCtn--minMax">
+            <div>
+              <label>Min</label>
+              <input type="number" name="min_carbs" class="form__input--textNum" />
+            </div>
+            <div>
+              <label>Max</label>
+              <input type="number" name="max_carbs" class="form__input--textNum" />
+            </div>
+          </div>
+        </div>
 
         <input type="submit" class="button__index--create" value="Search" />
       </form>
@@ -94,8 +138,16 @@
                 <td>{{this.sodium}}</td>
                 <td>{{this.warning}}</td>
                 <td>{{this.color_theme}}</td>
-                <td><img class="baseIndex__img" src={{this.img_url}} alt=""></td>
-                <td><img class="baseIndex__img" src={{this.bg_url}} alt=""></td>
+                <td><img
+                    class="baseIndex__img"
+                    src={{this.img_url}}
+                    alt=""
+                  /></td>
+                <td><img
+                    class="baseIndex__img"
+                    src={{this.bg_url}}
+                    alt=""
+                  /></td>
                 <td>
                   <a
                     class="button__index--edit"

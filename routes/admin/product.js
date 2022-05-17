@@ -62,15 +62,12 @@ router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   let product = await Product.collection();
 
   if (req.body.title) {
-    console.log("test1");
     product = product.where("title", "like", "%" + req.body.title + "%");
   }
   if (req.body.category_id && req.body.category_id !== "0") {
-    console.log("test2");
     product = product.where("category_id", "=", req.body.category_id);
   }
   if (req.body.classification_id) {
-    console.log("test3");
     product = product.query(function (qb) {
       qb.join(
         "classification_product",
@@ -82,8 +79,38 @@ router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
       ]);
     });
   }
+  if (req.body.stock && req.body.stock === "Available") {
+    product = product.where("stock", ">", 0);
+  }
+  if (req.body.stock && req.body.stock === "No Stock") {
+    product= product.where("stock", "<=", 0);
+  }
+
+  if (req.body.min_fat) {
+    product = product.where("fat", ">=", req.body.min_fat);
+  }
+  if (req.body.max_fat) {
+    product = product.where("fat", "<=", req.body.max_fat);
+  }
+
+  if (req.body.min_sfat) {
+    product = product.where("saturated_fat", ">=", req.body.min_sfat);
+  }
+  if (req.body.max_sfat) {
+    product = product.where("saturated_fat", "<=", req.body.max_sfat);
+  }
+
+  if (req.body.min_carbs) {
+    product = product.where("carbohydrates", ">=", req.body.min_carbs);
+  }
+  if (req.body.max_carbs) {
+    product = product.where("carbohydrates", "<=", req.body.max_carbs);
+  }
 
   
+
+
+
 
   let searchResult = await product.fetch();
 
