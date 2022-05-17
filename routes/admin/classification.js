@@ -1,26 +1,26 @@
 const express = require("express");
 const router = express.Router();
-
 const { Classification } = require("../../models");
 const { createClassificationForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility/");
+const { ExpressError, catchAsync } = require("../../utility/expressError");
 
 // Get all data from classification table
-router.get("/", checkIfAuthenticated, async (req, res) => {
+router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.collection().fetch();
   res.render("classification/index", {
     classification: classification.toJSON(),
   });
-});
+}));
 
-router.get("/create", checkIfAuthenticated, async (req, res) => {
+router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classificationForm = createClassificationForm();
   res.render("classification/create", {
     form: classificationForm.toHTML(addScssValidations),
   });
-});
+}));
 
-router.post("/create", checkIfAuthenticated, async (req, res) => {
+router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classificationForm = createClassificationForm();
   classificationForm.handle(req, {
     success: async (form) => {
@@ -38,9 +38,9 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
     id: req.params.id,
   }).fetch({
@@ -52,9 +52,9 @@ router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
     form: classificationForm.toHTML(addScssValidations),
     classification: classification.toJSON(),
   });
-});
+}));
 
-router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
     id: req.params.id,
   }).fetch({
@@ -76,9 +76,9 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
     id: req.params.id,
   }).fetch({
@@ -87,9 +87,9 @@ router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
   res.render("classification/delete", {
     classification: classification.toJSON(),
   });
-});
+}));
 
-router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
+router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
     id: req.params.id,
   }).fetch({
@@ -100,6 +100,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
     message: `Successfullly deleted classification ${req.params.id}`
   }]);
   res.redirect("/admin/classification");
-});
+}));
 
 module.exports = router;

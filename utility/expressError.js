@@ -1,4 +1,5 @@
-class expressError extends Error {
+// Allows us to throw custom errors
+class ExpressError extends Error {
   constructor(message, statusCode) {
     super();
     this.message = message;
@@ -6,4 +7,14 @@ class expressError extends Error {
   }
 }
 
-module.exports = expressError;
+// Catch errors so that heroku doesnt always crash
+const catchAsync = (func) => {
+  return (req, res, next) => {
+    func(req, res, next).catch(error => next(error))
+  }
+}
+
+module.exports = {
+  ExpressError,
+  catchAsync,
+} 

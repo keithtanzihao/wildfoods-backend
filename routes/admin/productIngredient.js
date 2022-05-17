@@ -1,26 +1,26 @@
 const express = require("express");
 const router = express.Router();
-
 const { ProductIngredient } = require("../../models");
 const { createProductIngredientForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility/");
+const { ExpressError, catchAsync } = require("../../utility/expressError");
 
 // Get all data from productIngredient table
-router.get("/", checkIfAuthenticated, async (req, res) => {
+router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.collection().fetch();
   res.render("productIngredient/index", {
     productIngredient: productIngredient.toJSON(),
   });
-});
+}));
 
-router.get("/create", checkIfAuthenticated, async (req, res) => {
+router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredientForm = createProductIngredientForm();
   res.render("productIngredient/create", {
     form: productIngredientForm.toHTML(addScssValidations),
   });
-});
+}));
 
-router.post("/create", checkIfAuthenticated, async (req, res) => {
+router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredientForm = createProductIngredientForm();
   productIngredientForm.handle(req, {
     success: async (form) => {
@@ -38,9 +38,9 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
     id: req.params.id,
   }).fetch({
@@ -52,9 +52,9 @@ router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
     form: productIngredientForm.toHTML(addScssValidations),
     productIngredient: productIngredient.toJSON(),
   });
-});
+}));
 
-router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
     id: req.params.id,
   }).fetch({
@@ -76,9 +76,9 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
     id: req.params.id,
   }).fetch({
@@ -87,9 +87,9 @@ router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
   res.render("productIngredient/delete", {
     productIngredient: productIngredient.toJSON(),
   });
-});
+}));
 
-router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
+router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
     id: req.params.id,
   }).fetch({
@@ -100,6 +100,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
     message: `Successfullly deleted product ingredient ${req.params.id}`
   }]);
   res.redirect("/admin/productIngredient");
-});
+}));
 
 module.exports = router;

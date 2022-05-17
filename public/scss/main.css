@@ -53,7 +53,7 @@ table {
 }
 
 .input__ctn label {
-  font-family: nittiRegular;
+  font-family: apercuRegular;
   font-size: 1rem;
 }
 
@@ -63,27 +63,55 @@ table {
 }
 
 .input__div--invalid {
-  border: 4px solid #F25C59;
+  border: 4px solid #f84f5a;
   box-sizing: border-box;
 }
 
 .input__span--valid {
-  font-family: nittiRegular;
+  font-family: apercuRegular;
   font-size: 1rem;
   margin-left: 0.5rem;
-  color: #4FB07D;
+  color: #4fb07d;
 }
 
 .input__span--invalid {
-  font-family: nittiRegular;
+  font-family: apercuRegular;
   font-size: 1rem;
   margin-left: 0.5rem;
-  color: #F25C59;
+  color: #f84f5a;
 }
 
 a {
   display: inline-block;
+  text-decoration: none;
+  transition: 0.3s;
+  color: #000000;
   cursor: pointer;
+}
+
+.sidebar a:hover {
+  color: #ffffff;
+}
+
+a.link {
+  text-decoration: underline;
+}
+
+a.link:hover {
+  color: #ed7b48;
+}
+
+.button__navbarMenu {
+  font-family: canelaRegular;
+  font-size: 1.5rem;
+}
+
+.button__sidebarClose {
+  font-family: canelaBold;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
 }
 
 .button__index--create {
@@ -92,7 +120,7 @@ a {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   background-color: transparent;
-  font-family: nittiBold;
+  font-family: canelaBold;
   font-size: 1rem;
   cursor: pointer;
   margin: 0rem 1rem;
@@ -104,12 +132,12 @@ a {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   background-color: transparent;
-  font-family: nittiBold;
+  font-family: canelaBold;
   font-size: 1rem;
   cursor: pointer;
   width: 6rem;
   text-align: center;
-  background-color: #4FB07D;
+  background-color: #4fb07d;
 }
 
 .button__index--delete {
@@ -118,12 +146,12 @@ a {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   background-color: transparent;
-  font-family: nittiBold;
+  font-family: canelaBold;
   font-size: 1rem;
   cursor: pointer;
   width: 6rem;
   text-align: center;
-  background-color: #F25C59;
+  background-color: #f84f5a;
 }
 
 .button__index--submit {
@@ -132,12 +160,12 @@ a {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   background-color: transparent;
-  font-family: nittiBold;
+  font-family: canelaBold;
   font-size: 1rem;
   cursor: pointer;
   width: 12rem;
   text-align: center;
-  background-color: #4FB07D;
+  background-color: #4fb07d;
 }
 
 .button__ingredientCreate--submit {
@@ -146,18 +174,17 @@ a {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   background-color: transparent;
-  font-family: nittiBold;
+  font-family: canelaBold;
   font-size: 1rem;
   cursor: pointer;
-  background-color: #4FB07D;
+  background-color: #4fb07d;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  border-top: 4px solid black;
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
 }
 
@@ -168,11 +195,18 @@ form {
 }
 
 form.baseIndex__search {
-  overflow: scroll;
+  position: relative;
   display: flex;
-  height: 50vh;
   width: 100%;
   background-color: pink;
+}
+
+form.baseIndex__search > div {
+  font-family: apercuRegular;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .form__ctn--search {
@@ -183,7 +217,7 @@ form.baseIndex__search {
 }
 
 .form__input--search {
-  font-family: nittiRegular;
+  font-family: apercuRegular;
   font-size: 1rem;
   border: 4px solid black;
   box-sizing: border-box;
@@ -192,22 +226,22 @@ form.baseIndex__search {
 }
 
 .form__success {
-  border: 2px solid #4FB07D;
+  border: 2px solid #4fb07d;
 }
 
 .form__failure {
-  border: 2px solid #F25C59;
+  border: 2px solid #f84f5a;
 }
 
 .form__label {
-  font-family: nittiRegular;
-  font-size: 1rem;
+  font-family: apercuRegular;
+  font-size: 1.25rem;
 }
 
 .form__input--textNum,
 .form__input--login,
 .form__input--select {
-  font-family: nittiRegular;
+  font-family: apercuRegular;
   font-size: 1rem;
   border: 4px solid black;
   box-sizing: border-box;
@@ -216,65 +250,70 @@ form.baseIndex__search {
 }
 
 .form__input--login {
-  font-family: nittiBold;
-  font-size: 1.25rem;
+  font-family: canelaBold;
+  font-size: 1.5rem;
   padding: 0.5rem;
   width: 100%;
 }
 
 .navbar {
-  padding: 1rem 2rem;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 4px solid black;
   box-sizing: border-box;
-  height: 8vh;
+  padding: 2rem;
+  background-color: #ed7b48;
 }
 
 .navbar > h1 {
-  font-family: nittiBold;
-  font-size: 2rem;
+  font-family: canelaBold;
+  font-size: 2.5rem;
 }
 
 .sidebar {
-  border-left: 4px solid black;
-  border-right: 4px solid black;
+  position: absolute;
+  z-index: 10;
+  top: 0%;
+  display: none;
+  flex-direction: column;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  padding: 2rem;
   width: 20vw;
-  height: 92vh;
+  height: 100%;
+  background-color: #bd5a4b;
 }
 
-.sidebar > p {
-  font-family: nittiRegular;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-}
-
-.sidebar > ul {
+.sidebar__ctn--userInfo,
+.sidebar__ctn--tableInfo {
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
 }
 
-.sidebar > ul li {
-  margin-bottom: 0.5rem;
-  padding: 0rem 2rem;
+.sidebar__ctn--userInfo > h2,
+.sidebar__ctn--tableInfo > h2 {
+  font-family: canelaBold;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.sidebar > ul li {
-  font-family: nittiRegular;
-  font-size: 1rem;
+.sidebar__ctn--userInfo ul,
+.sidebar__ctn--tableInfo ul {
+  font-family: apercuRegular;
   font-size: 1.25rem;
+  box-sizing: border-box;
+  padding-left: 1rem;
 }
 
-.sidebar > ul > .sidebar__email {
-  font-family: nittiBold;
+.sidebar__ctn--userInfo ul li,
+.sidebar__ctn--tableInfo ul li {
+  margin-bottom: 1rem;
+}
+
+.sidebar__email > p {
+  font-family: canelaRegular;
   font-size: 1rem;
-  font-size: 1.25rem;
 }
 
 .base {
@@ -282,15 +321,13 @@ form.baseIndex__search {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  border-right: 4px solid black;
   box-sizing: border-box;
-  max-width: 80vw;
-  max-height: 92vh;
+  height: 100%;
 }
 
 .base__flash--success,
 .base__flash--error {
-  font-family: nittiRegular;
+  font-family: apercuRegular;
   font-size: 1rem;
   align-self: center;
   box-sizing: border-box;
@@ -300,75 +337,11 @@ form.baseIndex__search {
 }
 
 .base__flash--success {
-  background-color: #4FB07D;
+  background-color: #4fb07d;
 }
 
 .base__flash--error {
-  background-color: #F25C59;
-}
-
-.baseIndex,
-.baseCreate {
-  position: relative;
-  overflow: scroll;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.baseIndex > div > h1,
-.baseCreate > div > h1 {
-  font-family: nittiBold;
-  font-size: 2rem;
-}
-
-.baseIndex__header {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-}
-
-.baseIndex__ctn {
-  overflow: scroll;
-  border-top: 4px solid black;
-  box-sizing: border-box;
-  padding-bottom: 5rem;
-  width: 80vw;
-}
-
-table.baseIndex__table {
-  overflow: scroll;
-  max-width: 80vw;
-}
-
-.baseIndex__table > thead {
-  background-color: orange;
-}
-
-.baseIndex__table > thead th {
-  font-family: nittiRegular;
-  font-size: 1rem;
-  border: 2px solid black;
-  box-sizing: border-box;
-  padding: 1rem;
-  width: 10vw;
-}
-
-.baseIndex__table > tbody tr td:first-child,
-.baseIndex__table > tbody tr td:last-child {
-  text-align: center;
-}
-
-.baseIndex__table > tbody td {
-  font-family: nittiRegular;
-  font-size: 1rem;
-  border: 2px solid black;
-  box-sizing: border-box;
-  vertical-align: top;
-}
-
-.baseIndex__img {
-  width: 10vw;
+  background-color: #f84f5a;
 }
 
 .baseLogin {
@@ -386,8 +359,8 @@ table.baseIndex__table {
 }
 
 .baseLogin__header > h1 {
-  font-family: nittiBold;
-  font-size: 2rem;
+  font-family: canelaBold;
+  font-size: 2.5rem;
   padding: 1rem;
 }
 
@@ -399,21 +372,105 @@ table.baseIndex__table {
 }
 
 .baseLogin__footer > p {
-  font-family: nittiRegular;
-  font-size: 1rem;
+  font-family: apercuRegular;
+  font-size: 1.25rem;
   padding: 1rem;
+}
+
+.baseIndex,
+.baseCreate {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.baseIndex div:first-child,
+.baseCreate div:first-child {
+  display: flex;
+  padding: 2rem;
+}
+
+.baseIndex > div > h1,
+.baseCreate > div > h1 {
+  font-family: canelaBold;
+  font-size: 2.5rem;
+}
+
+.baseIndex__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.baseIndex__ctn {
+  position: relative;
+  overflow: scroll;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+table.baseIndex__table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.baseIndex__table > thead {
+  background-color: orange;
+}
+
+.baseIndex__table > thead th {
+  font-family: apercuRegular;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 10vw;
+}
+
+.baseIndex__table > tbody tr td:first-child,
+.baseIndex__table > tbody tr td:last-child {
+  text-align: center;
+}
+
+.baseIndex__table > tbody td {
+  font-family: apercuRegular;
+  font-size: 1rem;
+  border: 2px solid black;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.baseIndex__table > tbody td.td__wordBreak {
+  padding-right: 0.5rem;
+  word-break: break-all;
+}
+
+.baseIndex__img {
+  width: 10vw;
 }
 
 body {
   position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
-body div:nth-child(2) {
-  display: flex;
+@font-face {
+  font-family: "apercuRegular";
+  src: url("./vendors/fonts/apercu/apercuRegular.ttf");
 }
-
+@font-face {
+  font-family: "apercuBold";
+  src: url("./vendors/fonts/apercu/apercuBold.ttf");
+}
+@font-face {
+  font-family: "apercuMedium";
+  src: url("./vendors/fonts/apercu/apercuMedium.ttf");
+}
+@font-face {
+  font-family: "apercuLight";
+  src: url("./vendors/fonts/apercu/apercuLight.ttf");
+}
 @font-face {
   font-family: "nittiBold";
   src: url("./vendors/fonts/nitti/Nitti-Bold.ttf");
@@ -425,6 +482,34 @@ body div:nth-child(2) {
   src: url("./vendors/fonts/nitti/Nitti-Normal.ttf");
   font-weight: normal;
   font-style: normal;
+}
+@font-face {
+  font-family: "canelaBlack";
+  src: url("./vendors/fonts/canela/Canela-Black.ttf");
+}
+@font-face {
+  font-family: "canelaBold";
+  src: url("./vendors/fonts/canela/Canela-bold.ttf");
+}
+@font-face {
+  font-family: "canelaDeckBold";
+  src: url("./vendors/fonts/canela/Canela-Deck-Bold.ttf");
+}
+@font-face {
+  font-family: "canelaLight";
+  src: url("./vendors/fonts/canela/Canela-Light.ttf");
+}
+@font-face {
+  font-family: "canelaMedium";
+  src: url("./vendors/fonts/canela/Canela-Medium.ttf");
+}
+@font-face {
+  font-family: "canelaRegular";
+  src: url("./vendors/fonts/canela/Canela-Regular.ttf");
+}
+@font-face {
+  font-family: "canelaThin";
+  src: url("./vendors/fonts/canela/Canela-Thin-1.ttf");
 }
 
 /*# sourceMappingURL=main.css.map */

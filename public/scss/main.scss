@@ -4,31 +4,80 @@
 @import "layout";
 @import "pages";
 
-
-// Need to chug these bad boys somewhere later
 body {
   position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-body div:nth-child(2) {
-  display: flex;
 }
 
 
-// Gotta refactor this later. 
-// Cant seem to make it work in fonts/_index.scss
+
+// Apercu fonts
 @font-face {
-  font-family: 'nittiBold';
-  src: url('./vendors/fonts/nitti/Nitti-Bold.ttf') ;
+  font-family: "apercuRegular";
+  src: url("./vendors/fonts/apercu/apercuRegular.ttf");
+}
+
+@font-face {
+  font-family: "apercuBold";
+  src: url("./vendors/fonts/apercu/apercuBold.ttf");
+}
+
+@font-face {
+  font-family: "apercuMedium";
+  src: url("./vendors/fonts/apercu/apercuMedium.ttf");
+}
+
+@font-face {
+  font-family: "apercuLight";
+  src: url("./vendors/fonts/apercu/apercuLight.ttf");
+}
+
+// Nitti fonts
+@font-face {
+  font-family: "nittiBold";
+  src: url("./vendors/fonts/nitti/Nitti-Bold.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'nittiRegular';
-  src: url('./vendors/fonts/nitti/Nitti-Normal.ttf') ;
+  font-family: "nittiRegular";
+  src: url("./vendors/fonts/nitti/Nitti-Normal.ttf");
   font-weight: normal;
   font-style: normal;
+}
+
+// Canela Fonts
+@font-face {
+  font-family: "canelaBlack";
+  src: url("./vendors/fonts/canela/Canela-Black.ttf");
+}
+
+@font-face {
+  font-family: "canelaBold";
+  src: url("./vendors/fonts/canela/Canela-bold.ttf");
+}
+
+@font-face {
+  font-family: "canelaDeckBold";
+  src: url("./vendors/fonts/canela/Canela-Deck-Bold.ttf");
+}
+
+@font-face {
+  font-family: "canelaLight";
+  src: url("./vendors/fonts/canela/Canela-Light.ttf");
+}
+
+@font-face {
+  font-family: "canelaMedium";
+  src: url("./vendors/fonts/canela/Canela-Medium.ttf");
+}
+
+@font-face {
+  font-family: "canelaRegular";
+  src: url("./vendors/fonts/canela/Canela-Regular.ttf");
+}
+
+@font-face {
+  font-family: "canelaThin";
+  src: url("./vendors/fonts/canela/Canela-Thin-1.ttf");
 }

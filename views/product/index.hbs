@@ -8,7 +8,7 @@
         <a class="button__index--create" href="product/create">Create</a>
       </div>
 
-      {{!-- <form method="POST" class="baseIndex__search">
+      <form method="POST" class="baseIndex__search">
         <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
 
         <div>
@@ -18,7 +18,7 @@
 
         <div>
           <label>Category</label>
-          <select name="category_id">
+          <select name="category_id" class="form__input--textNum">
             {{#each category}}
               <option value={{id}}>{{title}}</option>
             {{/each}}
@@ -27,7 +27,7 @@
 
         <div>
           <label>Classification</label>
-          <select name="classification_id" multiple>
+          <select name="classification_id" class="form__input--textNum" multiple>
             {{#each classification}}
               <option value={{id}}>{{title}}</option>
             {{/each}}
@@ -35,7 +35,7 @@
         </div>
 
         <input type="submit" class="button__index--create" value="Search" />
-      </form> --}}
+      </form>
 
       <div class="baseIndex__ctn">
         <table class="baseIndex__table">
@@ -85,10 +85,6 @@
                 <td><img class="baseIndex__img" src={{this.img_url}} alt=""></td>
                 <td><img class="baseIndex__img" src={{this.bg_url}} alt=""></td>
                 <td>
-                  <a
-                    class="button__index--edit"
-                    href="/admin/cart/add/{{this.id}}"
-                  >Add to cart</a>
                   <a
                     class="button__index--edit"
                     href="/admin/product/{{this.id}}/edit"

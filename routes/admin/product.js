@@ -15,71 +15,10 @@ const {
   addScssValidationsSearch,
 } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility/");
+const { ExpressError, catchAsync } = require("../../utility/expressError");
 
-/**
- * Freaking mess of a search function will handle later
- */
 
-// router.get("/", checkIfAuthenticated, async (req, res) => {
-//   const allCategory = await Category.fetchAll().map((category) => {
-//     return [category.get("id"), category.get("title")];
-//   });
-//   allCategory.unshift([0, "-------------"]);
-//   const allClassification = await Classification.fetchAll().map(
-//     (classification) => {
-//       return [classification.get("id"), classification.get("title")];
-//     }
-//   );
-//   const allProductIngredient = await ProductIngredient.fetchAll().map(
-//     (productIngredient) => {
-//       return [productIngredient.get("id"), productIngredient.get("title")];
-//     }
-//   );
-
-//   let searchForm = searchProductForm(
-//     allCategory,
-//     allClassification,
-//     allProductIngredient
-//   );
-//   let product = await Product.collection();
-
-//   searchForm.handle(req, {
-//     success: async (form) => {
-//       if (form.data.title) {
-//         product = product.where("title", "like", "%" + req.query.title + "%")
-//       }
-
-//       let searchResult = await product.fetch({
-//         withRelated: ["category"],
-//       });
-//       res.render("product/index", {
-//         product: searchResult.toJSON(),
-//         form: form.toHTML(addScssValidationsSearch),
-//       });
-//     },
-
-//     empty: async (form) => {
-//       let searchResult = await product.fetch({
-//         withRelated: ["category"],
-//       });
-//       res.render("product/index", {
-//         product: searchResult.toJSON(),
-//         form: form.toHTML(addScssValidationsSearch),
-//       });
-//     },
-//     error: async (form) => {
-//       let searchResult = await product.fetch({
-//         withRelated: ["category"],
-//       });
-//       res.render("product/index", {
-//         product: searchResult.toJSON(),
-//         form: form.toHTML(addScssValidationsSearch),
-//       });
-//     },
-//   });
-// });
-
-router.get("/", checkIfAuthenticated, async (req, res) => {
+router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allCategory = await Category.fetchAll().map((category) => {
     return { id: category.get("id"), title: category.get("title") };
   });
@@ -100,10 +39,10 @@ router.get("/", checkIfAuthenticated, async (req, res) => {
     category: allCategory,
     classification: allClassification,
   });
-});
+}));
 
 // Going rogue baby
-router.post("/", checkIfAuthenticated, async (req, res) => {
+router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allCategory = await Category.fetchAll().map((category) => {
     return { id: category.get("id"), title: category.get("title") };
   });
@@ -159,9 +98,9 @@ router.post("/", checkIfAuthenticated, async (req, res) => {
     category: allCategory,
     classification: allClassification,
   });
-});
+}));
 
-router.get("/create", checkIfAuthenticated, async (req, res) => {
+router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allCategory = await Category.fetchAll().map((category) => {
     return [category.get("id"), category.get("title")];
   });
@@ -190,9 +129,9 @@ router.get("/create", checkIfAuthenticated, async (req, res) => {
     cloudinaryPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
     uploadCareKey: process.env.UPLOADCARE_KEY,
   });
-});
+}));
 
-router.post("/create", checkIfAuthenticated, async (req, res) => {
+router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allCategory = await Category.fetchAll().map((category) => {
     return [category.get("id"), category.get("title")];
   });
@@ -242,9 +181,9 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allCategory = await Category.fetchAll().map((category) => {
     return [category.get("id"), category.get("title")];
   });
@@ -289,9 +228,9 @@ router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
     form: productForm.toHTML(addScssValidations),
     product: product.toJSON(),
   });
-});
+}));
 
-router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allCategory = await Category.fetchAll().map((category) => {
     return [category.get("id"), category.get("title")];
   });
@@ -347,20 +286,23 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const product = await Product.where({
     id: req.params.id,
   }).fetch({
     require: true,
   });
-  res.render("product/delete", {
-    product: product.toJSON(),
-  });
-});
 
-router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
+  console.log(product.toJSON());
+
+  // res.render("product/delete", {
+  //   product: product.toJSON(),
+  // });
+}));
+
+router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const product = await Product.where({
     id: req.params.id,
   }).fetch({
@@ -373,6 +315,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
     },
   ]);
   res.redirect("/admin/product");
-});
+}));
 
 module.exports = router;

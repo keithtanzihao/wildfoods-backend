@@ -4,16 +4,17 @@ const router = express.Router();
 const { Content, Product } = require("../../models");
 const { createContentForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility");
+const { ExpressError, catchAsync } = require("../../utility/expressError");
 
 // Get all data from content table
-router.get("/", checkIfAuthenticated, async (req, res) => {
+router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.collection().fetch();
   res.render("content/index", {
     content: content.toJSON(),
   });
-});
+}));
 
-router.get("/create", checkIfAuthenticated, async (req, res) => {
+router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allProduct = await Product.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
@@ -22,9 +23,9 @@ router.get("/create", checkIfAuthenticated, async (req, res) => {
   res.render("content/create", {
     form: contentForm.toHTML(addScssValidations),
   });
-});
+}));
 
-router.post("/create", checkIfAuthenticated, async (req, res) => {
+router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allProduct = await Product.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
@@ -45,9 +46,9 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allProduct = await Category.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
@@ -67,9 +68,9 @@ router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
     form: contentForm.toHTML(addScssValidations),
     content: content.toJSON(),
   });
-});
+}));
 
-router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
+router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.where({
     id: req.params.id,
   }).fetch({
@@ -91,9 +92,9 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
       });
     },
   });
-});
+}));
 
-router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
+router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.where({
     id: req.params.id,
   }).fetch({
@@ -102,9 +103,9 @@ router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
   res.render("content/delete", {
     content: content.toJSON(),
   });
-});
+}));
 
-router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
+router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.where({
     id: req.params.id,
   }).fetch({
@@ -115,6 +116,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
     message: `Successfullly deleted content ${req.params.id}`
   }]);
   res.redirect("/admin/content");
-});
+}));
 
 module.exports = router;

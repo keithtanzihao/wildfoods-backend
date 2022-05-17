@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-
 const cloudinary = require('cloudinary')
+const { ExpressError, catchAsync } = require("../../utility/expressError");
+
 cloudinary.config({
     'api_key': process.env.CLOUDINARY_API_KEY,
     'api_secret': process.env.CLOUDINARY_SECRET
 })
 
-
-router.get('/sign', async (req,res)=>{
+router.get('/sign', catchAsync(async (req,res)=>{
     // retrieve the parameters we need to send to cloudinary
     const params_to_sign = JSON.parse(req.query.params_to_sign);
 
@@ -19,6 +19,6 @@ router.get('/sign', async (req,res)=>{
     const signature = cloudinary.utils.api_sign_request(params_to_sign, apiSecret);
     
     res.send(signature);
-})
+}));
 
 module.exports = router;

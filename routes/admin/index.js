@@ -14,5 +14,6 @@ router.use("/admin/recipie", require("./recipie"));
 router.use("/admin/instruction", require("./instruction"));
 router.use("/admin/recipieIngredient", require("./recipieIngredient"));
 router.use("/admin/cart", require("./cart"));
+router.use("/admin/order", require("./orders"));
 
 module.exports = router;

@@ -5,20 +5,6 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Api user login
 const getHashedPassword = (password) => {
   return crypto.createHash("sha256").update(password).digest("base64"); 

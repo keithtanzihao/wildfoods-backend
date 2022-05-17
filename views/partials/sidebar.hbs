@@ -1,28 +1,41 @@
 <div class="sidebar">
-  <p>Welcome</p>
-  <ul>
+
+  <div class="button__sidebarClose">
+    <h2>&#10005;</h2>
+  </div>
+
+  <div class="sidebar__ctn--userInfo">
     {{#if staff}}
-      <li class="sidebar__email">Staff: {{staff.email}}</li>
-      <li><a href="/admin/logout">Logout</a></li>
-      <li><a href="">Orders</a></li>
-      <li><a href="/admin/cart">Cart</a></li>
+      <h2>Staff</h2>
     {{else}}
-      <li><a href="/admin/login">Staff Login</a></li>
+      <h2>Guest</h2>
     {{/if}}
     
-  </ul>
+    <ul>
+      {{#if staff}}
+        <li class="sidebar__email">Email: <p>{{staff.email}}</p></li>
+        <li><a href="/admin/logout">Logout</a></li>
+        <li><a href="/admin/order">Orders</a></li>
+      {{else}}
+        <li><a href="/admin/login">Staff Login</a></li>
+      {{/if}}
 
-  <p>Tables</p>
-  <ul>
-    <li><a href="/admin/product">Product</a></li>
-    <li><a href="/admin/category">Category</a></li>
-    <li><a href="/admin/classification">Classification</a></li>
-    <li><a href="/admin/productIngredient">Product Ingredient</a></li>
-    <li><a href="/admin/media">Media</a></li>
-    <li><a href="/admin/content">Content</a></li>
-    <li><a href="/admin/gift">Gift</a></li>
-    <li><a href="/admin/recipie">Recipie</a></li>
-    <li><a href="/admin/instruction">Instruction</a></li>
-    <li><a href="/admin/recipieIngredient">Recipie Ingredient</a></li>
-  </ul>
+    </ul>
+  </div>
+
+  <div class="sidebar__ctn--tableInfo">
+    <h2>Tables</h2>
+    <ul>
+      <li><a href="/admin/product">Product</a></li>
+      <li><a href="/admin/category">Category</a></li>
+      <li><a href="/admin/classification">Classification</a></li>
+      <li><a href="/admin/productIngredient">Product Ingredient</a></li>
+      <li><a href="/admin/media">Media</a></li>
+      <li><a href="/admin/content">Content</a></li>
+      <li><a href="/admin/gift">Gift</a></li>
+      <li><a href="/admin/recipie">Recipie</a></li>
+      <li><a href="/admin/instruction">Instruction</a></li>
+      <li><a href="/admin/recipieIngredient">Recipie Ingredient</a></li>
+    </ul>
+  </div>
 </div>

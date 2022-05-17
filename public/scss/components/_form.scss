@@ -1,13 +1,8 @@
 form {
-  // flex-grow: 1;
   display: flex;
   flex-direction: column;
-  
-  // Remove later
-  border-top: 4px solid black;
   box-sizing: border-box;
-  
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
 }
 
@@ -21,11 +16,17 @@ form {
 // ---------------------- Search related forms ----------------------
 
 form.baseIndex__search {
-  overflow: scroll;
+  position: relative;
   display: flex;
-  height: 50vh;
   width: 100%;
   background-color: pink;
+}
+
+form.baseIndex__search > div {
+  @include p__base;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .form__ctn--search {
@@ -56,7 +57,7 @@ form.baseIndex__search {
 }
 
 .form__label {
-  @include p__base;
+  @include h6__base--apercu;
 }
 
 .form__input--textNum,

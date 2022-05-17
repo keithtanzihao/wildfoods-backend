@@ -1,8 +1,50 @@
 
 a {
   display: inline-block;
+  text-decoration: none;
+  transition: 0.3s;
+  color: $black-color;
   cursor: pointer;
 }
+
+.sidebar a:hover {
+  color: $white-color;
+}
+
+a.link {
+  text-decoration: underline;
+}
+
+a.link:hover {
+  color: $sidebar-color1;
+}
+
+.button__navbarMenu {
+  @include h5__base--canela;
+}
+
+.button__sidebarClose {
+  @include h1__base--canela;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Admin page buttons
 .button__index--create {
@@ -35,3 +77,10 @@ a {
   @include button__base;
   background-color: $green-color;
 }
+
+
+
+
+
+
+

@@ -1,17 +1,11 @@
+
 .base {
   position: relative;
-  // overflow: scroll;
   flex-grow: 1;
-
   display: flex;
   flex-direction: column;
-
-  // Might remove later
-  border-right: 4px solid black;
   box-sizing: border-box;
-
-  max-width: calc(100vw - 20vw);
-  max-height: calc(100vh - 8vh);
+  height: 100%;
 }
 
 .base__flash--success,
@@ -32,40 +26,79 @@
   background-color: $red-color;
 }
 
-// ---------- baseIndex stuff ----------
-// header
-.baseIndex,
-.baseCreate {
+
+// // ---------- baseLogin stuff ----------
+
+.baseLogin {
   position: relative;
-  overflow: scroll;
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
-}
-
-
-.baseIndex > div > h1,
-.baseCreate > div > h1 {
-  @include h1__base;
-}
-
-.baseIndex__header {
-  display: flex;
+  justify-content: center;
   align-items: center;
+}
+
+.baseLogin__ctn {
+  @include borders__testing;
+  width: 60vw;
+}
+
+.baseLogin__header > h1 {
+  @include h1__base--canela;
   padding: 1rem;
 }
 
-.baseIndex__ctn {
-  overflow: scroll;
+.baseLogin__footer {
+  display: flex;
+  justify-content: center;
   border-top: 4px solid black;
   box-sizing: border-box;
-  padding-bottom: 5rem;
-  width: 80vw;
+}
+
+.baseLogin__footer > p {
+  @include h6__base--apercu;
+  padding: 1rem;
+}
+
+
+// ---------- baseIndex stuff ----------
+
+.baseIndex,
+.baseCreate {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.baseIndex div:first-child,
+.baseCreate div:first-child {
+  display: flex;
+  padding: 2rem;
+}
+
+.baseIndex > div > h1,
+.baseCreate > div > h1 {
+  @include h1__base--canela;
+}
+
+.baseIndex__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.baseIndex__ctn {
+  position: relative;
+  overflow: scroll;
+  box-sizing: border-box;
+  width:100%;
 }
 
 table.baseIndex__table {
-  overflow: scroll;
-  max-width: calc(100vw - 20vw);
+  table-layout:fixed;
+  width: 100%;
 }
 
 .baseIndex__table > thead {
@@ -74,7 +107,6 @@ table.baseIndex__table {
 
 .baseIndex__table > thead th {
   @include p__base;
-  border: 2px solid black;
   box-sizing: border-box;
   padding: 1rem;
   width: 10vw;
@@ -92,38 +124,13 @@ table.baseIndex__table {
   vertical-align: top;
 }
 
+.baseIndex__table > tbody td.td__wordBreak {
+  padding-right: 0.5rem;
+  word-break: break-all;
+}
+
 .baseIndex__img {
   width: 10vw;
 }
 
-// ---------- baseLogin stuff ----------
 
-.baseLogin {
-  position: relative;
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.baseLogin__ctn {
-  @include borders__testing;
-  width: 60vw;
-}
-
-.baseLogin__header > h1 {
-  @include h1__base;
-  padding: 1rem;
-}
-
-.baseLogin__footer {
-  display: flex;
-  justify-content: center;
-  border-top: 4px solid black;
-  box-sizing: border-box;
-}
-
-.baseLogin__footer > p {
-  @include p__base;
-  padding: 1rem;
-}

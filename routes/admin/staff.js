@@ -1,21 +1,20 @@
 const express = require("express");
 const crypto = require("crypto");
-
 const router = express.Router();
-
 const { Staff } = require("../../models");
 const { createLoginForm, addScssValidations } = require("../../utility/forms");
 const { getHashedPassword, checkIfLogin } = require("../../utility");
+const { ExpressError, catchAsync } = require("../../utility/expressError");
 
 // Register routes
-router.get("/register", checkIfLogin, async (req, res) => {
+router.get("/register", checkIfLogin, catchAsync(async (req, res) => {
   const staffForm = createLoginForm();
   res.render("staff/register", {
     form: staffForm.toHTML(addScssValidations),
   });
-});
+}));
 
-router.post("/register", checkIfLogin, async (req, res) => {
+router.post("/register", checkIfLogin, catchAsync(async (req, res) => {
   const category = await Staff.query({
     where: {
       email: req.body.email,
@@ -54,17 +53,17 @@ router.post("/register", checkIfLogin, async (req, res) => {
       },
     });
   }
-});
+}));
 
 // Login routes
-router.get("/login", checkIfLogin, async (req, res) => {
+router.get("/login", checkIfLogin, catchAsync(async (req, res) => {
   const staffForm = createLoginForm();
   res.render("staff/login", {
     form: staffForm.toHTML(addScssValidations),
   });
-});
+}));
 
-router.post("/login", async (req, res) => {
+router.post("/login", catchAsync(async (req, res) => {
   const staffForm = createLoginForm();
   staffForm.handle(req, {
     success: async (form) => {
@@ -113,7 +112,7 @@ router.post("/login", async (req, res) => {
       });
     },
   });
-});
+}));
 
 router.get('/logout', (req, res) => {
   req.session.staff = null;

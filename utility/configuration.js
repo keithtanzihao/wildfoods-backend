@@ -38,10 +38,19 @@ const csurfErrorMiddleware = (err, req, res, next) => {
   }
 }
 
+const errorRedirectMiddleware = (err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) {
+    err.message = "Page Not Found";
+  }
+  res.status(statusCode).render("error/index", { err, statusCode });
+}
+
 module.exports = {
   setSessionOptions,
   flashMsgMiddleware,
   csurfMiddleware,
   csurfTokenMiddleware,
-  csurfErrorMiddleware
+  csurfErrorMiddleware,
+  errorRedirectMiddleware
 };

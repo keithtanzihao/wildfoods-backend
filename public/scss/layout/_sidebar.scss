@@ -1,39 +1,42 @@
-
 .sidebar {
-  border-left: 4px solid black;
-  border-right: 4px solid black;
+  position: absolute;
+  z-index: 10;
+  top: 0%;
+  // Menu button changes display to flex
+  display: none;
+  flex-direction: column;
   box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
+  padding: 2rem;
   width: 20vw;
-  height: calc(100vh - 8vh);
+  height: 100%;
+  background-color: $sidebar-color2;
 }
 
-.sidebar > p {
-  @include p__base;
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-}
- 
-.sidebar > ul {
+.sidebar__ctn--userInfo,
+.sidebar__ctn--tableInfo {
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
 }
 
-.sidebar > ul li {
-  margin-bottom: 0.5rem;
-  padding: 0rem 2rem;
+.sidebar__ctn--userInfo > h2,
+.sidebar__ctn--tableInfo > h2 {
+  @include h2__base--canela;
+  margin-bottom: 1rem;
 }
 
-.sidebar > ul li {
-  @include p__base;
-  font-size: 1.25rem;
+.sidebar__ctn--userInfo ul,
+.sidebar__ctn--tableInfo ul {
+  @include h6__base--apercu;
+  box-sizing: border-box;
+  padding-left: 1rem;
 }
 
-.sidebar > ul > .sidebar__email {
-  @include h2__base;
-  font-size: 1.25rem;
+.sidebar__ctn--userInfo ul li,
+.sidebar__ctn--tableInfo ul li {
+  margin-bottom: 1rem;
 }
 
-
+.sidebar__email > p {
+  @include p__base--canela;
+}
