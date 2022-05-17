@@ -1,151 +1,130 @@
 const express = require("express");
 const router = express.Router();
-const { Order } = require("../../models");
-const { createCategoryForm, addScssValidations } = require("../../utility/forms");
+const { Order, Status } = require("../../models");
+const { createOrderForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility/");
 const { ExpressError, catchAsync } = require("../../utility/expressError");
 
-router.get("/", catchAsync(async (req, res) => {
-  const order = await Order.collection().fetch({
-    require: false,
-    withRelated: ["product", "status", "user"]
-  });
+router.get(
+  "/",
+  catchAsync(async (req, res) => {
+    const allStatus = await Status.fetchAll().map((status) => {
+      return { id: status.get("id"), title: status.get("title") };
+    });
+    allStatus.unshift({ id: 0, title: "None" });
 
-  res.render("staff/order", {
-    order: order.toJSON(),
-  });
-}));
+    const order = await Order.collection().fetch({
+      require: false,
+      withRelated: ["product", "status", "user"],
+    });
 
-
-
+    res.render("order/index", {
+      order: order.toJSON(),
+      status: allStatus,
+    });
+  })
+);
 
 // Going rogue baby
-router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
-  
+router.post(
+  "/",
+  checkIfAuthenticated,
+  catchAsync(async (req, res) => {
+    const allStatus = await Status.fetchAll().map((status) => {
+      return { id: status.get("id"), title: status.get("title") };
+    });
+    allStatus.unshift({ id: 0, title: "None" });
 
-  let order = await Order.collection();
+    let order = await Order.collection();
 
-  if (req.body.name) {
-    order = order.query(function (qb) {
-      qb.join(
-        "user",
-        "order.user_id",
-        "=",
-        "user.id"
-      ).where("name", "like", "%" + req.body.name + "%");
-    })
-  }
+    if (req.body.title) {
+      order = order.query(function (qb) {
+        qb.join("product", "order.product_id", "=", "product.id").where(
+          "title",
+          "like",
+          "%" + req.body.title + "%"
+        );
+      });
+    }
 
-  let searchResult = await order.fetch();
+    if (req.body.name) {
+      order = order.query(function (qb) {
+        qb.join("user", "order.user_id", "=", "user.id").where(
+          "first_name",
+          "like",
+          "%" + req.body.name + "%"
+        );
+      });
+    }
 
-  console.log(req.body);
-  // console.log(searchResult.toJSON());
+    if (req.body.status_id && req.body.status_id !== "0") {
+      order = order.where("status_id", "=", req.body.status_id);
+    }
 
-  res.render("staff/order", {
-    order: searchResult.toJSON(),
+    let searchResult = await order.fetch({
+      withRelated: ["product", "status", "user"],
+    });
+
+    res.render("order/index", {
+      order: searchResult.toJSON(),
+      status: allStatus,
+    });
+  })
+);
+
+router.get("/:id/edit", async (req, res) => {
+  const allStatus = await Status.fetchAll().map((status) => {
+    return [status.get("id"), status.get("title")];
   });
-}));
+  
+  const order = await Order.where({
+    id: req.params.id,
+  }).fetch({
+    require: true,
+  });
 
+  const orderForm = createOrderForm(allStatus);
 
+  Object.keys(orderForm.fields).map((key) => {
+    orderForm.fields[key].value = order.get(key);
+  });
 
+  res.render("order/edit", {
+    form: orderForm.toHTML(addScssValidations),
+    order: order.toJSON(),
+  });
+});
 
+router.post("/:id/edit", async (req, res) => {
+  const allStatus = await Status.fetchAll().map((status) => {
+    return [status.get("id"), status.get("title")];
+  });
 
+  const order = await Order.where({
+    id: req.params.id,
+  }).fetch({
+    require: true,
+  });
 
+  const orderForm = createOrderForm(allStatus);
 
-
-
-
-
-
-
-// router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
-//   const categoryForm = createCategoryForm();
-//   res.render("category/create", {
-//     form: categoryForm.toHTML(addScssValidations),
-//   });
-// }));
-
-// router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
-//   const categoryForm = createCategoryForm();
-//   categoryForm.handle(req, {
-//     success: async (form) => {
-//       const category = new Category();
-//       category.set("title", form.data.title);
-//       await category.save();
-//       req.flash("success", [{
-//         message: `Successfullly create a new category`
-//       }]);
-//       res.redirect("/admin/category");
-//     },
-//     error: async (form) => {
-//       res.render("category/create", {
-//         form: form.toHTML(addScssValidations),
-//       });
-//     },
-//   });
-// }));
-
-// router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
-//   const category = await Category.where({
-//     id: req.params.id,
-//   }).fetch({
-//     require: true,
-//   });
-//   const categoryForm = createCategoryForm();
-//   categoryForm.fields.title.value = category.get("title");
-//   res.render("category/edit", {
-//     form: categoryForm.toHTML(addScssValidations),
-//     category: category.toJSON(),
-//   });
-
-// }));
-
-// router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
-//   const category = await Category.where({
-//     id: req.params.id,
-//   }).fetch({
-//     require: true,
-//   });
-//   const categoryForm = createCategoryForm();
-//   categoryForm.handle(req, {
-//     success: async (form) => {
-//       category.set(form.data);
-//       category.save();
-//       req.flash("success", [{
-//         message: `Successfullly editted category ${req.params.id}`
-//       }]);
-//       res.redirect("/admin/category");
-//     },
-//     error: async (form) => {
-//       res.render("category/edit", {
-//         form: form.toHTML(addScssValidations),
-//       });
-//     },
-//   });
-// }));
-
-// router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
-//   const category = await Category.where({
-//     id: req.params.id,
-//   }).fetch({
-//     require: true,
-//   });
-//   res.render("category/delete", {
-//     category: category.toJSON(),
-//   });
-// }));
-
-// router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
-//   const category = await Category.where({
-//     id: req.params.id,
-//   }).fetch({
-//     require: true,
-//   });
-//   await category.destroy();
-//   req.flash("success", [{
-//     message: `Successfullly deleted category ${req.params.id}`
-//   }]);
-//   res.redirect("/admin/category");
-// }));
+  orderForm.handle(req, {
+    success: async (form) => {
+      order.set(form.data);
+      order.save();
+      req.flash("success", [
+        {
+          message: `Successfullly editted order ${req.params.id}`,
+        },
+      ]);
+      res.redirect("/admin/order");
+    },
+    error: async (form) => {
+      res.render("order/edit", {
+        form: form.toHTML(addScssValidations),
+      });
+    },
+  });
+});
 
 module.exports = router;

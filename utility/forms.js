@@ -776,6 +776,23 @@ const createGetUserForm = (user) => {
   });
 };
 
+const createOrderForm = (status) => {
+  return forms.create({
+    status_id: fields.string({
+      required: true,
+      errorAfterField: true,
+      validators: [validators.required()],
+      cssClasses: {
+        label: ["form__label"],
+      },
+      widget: forms.widgets.select({
+        classes: ["form__input--textNum"],
+      }),
+      choices: status,
+    }),
+  });
+}
+
 module.exports = {
   addScssValidations,
   addScssValidationsSearch,
@@ -795,6 +812,7 @@ module.exports = {
   createMediaForm,
 
   createGetUserForm,
+  createOrderForm,
 };
 
 // a478932a290d1ce72c64

@@ -90,6 +90,7 @@ const recipieRoutes = require("./routes/admin/recipie");
 const instructionRoutes = require("./routes/admin/instruction");
 const recipieIngredient = require("./routes/admin/recipieIngredient");
 const cartRoutes = require("./routes/admin/cart");
+const orderRoutes = require("./routes/admin/orders");
 
 const categoryAPI = require("./routes/api/category");
 const classificationAPI = require("./routes/api/classification");
@@ -101,17 +102,17 @@ const orderAPI = require("./routes/api/order");
 
 async function main() {
   // app.get("/", function (req, res) {
-  //     if (req.session.staff) {
-  //       res.redirect("/admin/product");
-  //     } else {
-  //       res.redirect("/admin/login");
-  //     }
-  //   });
-  //   app.use(express.json(), adminRoutes);
-  //   app.use(apiRoutes);
-  //   app.use(errorRoutes);
-  //   app.use(errorRedirectMiddleware);
-  // }
+  //   if (req.session.staff) {
+  //     res.redirect("/admin/product");
+  //   } else {
+  //     res.redirect("/admin/login");
+  //   }
+  // });
+  // app.use(express.json(), adminRoutes);
+  // app.use(apiRoutes);
+  // app.use(errorRoutes);
+  // app.use(errorRedirectMiddleware);
+
   app.use("/admin", express.json(), staffRoutes);
   app.use('/cloudinary', express.json(), cloudinaryRoutes);
 
@@ -126,6 +127,7 @@ async function main() {
   app.use("/admin/instruction", express.json(), instructionRoutes);
   app.use("/admin/recipieIngredient", express.json(), recipieIngredient);
   app.use("/admin/cart", express.json(), cartRoutes);
+  app.use("/admin/order", express.json(), orderRoutes);
 
   app.use("/category", express.json(), categoryAPI);
   app.use("/classification", express.json(), classificationAPI);

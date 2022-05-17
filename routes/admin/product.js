@@ -57,10 +57,6 @@ router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
     }
   );
 
-  // const allProductIngredient = await ProductIngredient.fetchAll().map((productIngredient) => {
-  //   return [productIngredient.get("id"), productIngredient.get("title")];
-  // });
-
   let product = await Product.collection();
 
   if (req.body.title) {
@@ -88,10 +84,6 @@ router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   }
 
   let searchResult = await product.fetch();
-
-  console.log(req.body);
-
-  // console.log(searchResult.toJSON());
 
   res.render("product/index", {
     product: searchResult.toJSON(),
@@ -260,6 +252,7 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   productForm.handle(req, {
     success: async (form) => {
       let { classification, productIngredient, ...productData } = form.data;
+      console.log(form.data);
       product.set(productData);
       product.save();
 
@@ -286,20 +279,6 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
       });
     },
   });
-}));
-
-router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
-  const product = await Product.where({
-    id: req.params.id,
-  }).fetch({
-    require: true,
-  });
-
-  console.log(product.toJSON());
-
-  // res.render("product/delete", {
-  //   product: product.toJSON(),
-  // });
 }));
 
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
