@@ -23,15 +23,23 @@ router.get("/page/:page_number", async (req, res) => {
         ...req.query.classification_id,
       ])
     }
+    if (req.query.orderPrice && req.query.orderPrice === "Ascending") {
+      qb.orderBy("price", "ASC");
+    }
+    if (req.query.orderPrice && req.query.orderPrice === "Descending") {
+      qb.orderBy("price", "DESC");
+    }
+    if (req.query.isAvaliable === 1) {
+      qb.where("stock", ">", 0);
+    }
+    if (req.query.isAvaliable === 2) {
+      qb.where("stock", "<=", 0);
+    }
 
   }).fetchPage({
     pageSize: 4,
     page: req.params.page_number
   })
-
-  console.log(product.pagination);
-  console.log(req.query);
-
 
   res.status(200).send({
     product: product.toJSON(),
