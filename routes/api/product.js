@@ -13,6 +13,16 @@ router.get("/page/:page_number", async (req, res) => {
     if (req.query.category_id != 0) {
       qb.where("category_id", "=", req.query.category_id);
     }
+    if (req.query.classification_id != 0) {
+      qb.join(
+        "classification_product",
+        "product.id",
+        "=",
+        "classification_product.product_id"
+      ).where("classification_product.classification_id", "in", [
+        ...req.query.classification_id,
+      ])
+    }
 
   }).fetchPage({
     pageSize: 4,
