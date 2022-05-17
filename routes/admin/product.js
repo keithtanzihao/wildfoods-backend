@@ -281,6 +281,18 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
+  const product = await Product.where({
+    id: req.params.id,
+  }).fetch({
+    require: true,
+  });
+
+  res.render("product/delete", {
+    product: product.toJSON(),
+  });
+}));
+
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const product = await Product.where({
     id: req.params.id,
