@@ -34,6 +34,16 @@
           </select>
         </div>
 
+        <div>
+          <label>Availability</label>
+          <select name="classification_id" class="form__input--textNum" multiple>
+            {{#each classification}}
+              <option value={{id}}>{{title}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+
         <input type="submit" class="button__index--create" value="Search" />
       </form>
 
@@ -42,6 +52,7 @@
           <thead>
             <tr>
               <th>id</th>
+              <th>stock</th>
               <th>title</th>
               <th>description</th>
               <th>category_id</th>
@@ -67,6 +78,7 @@
             {{#each product}}
               <tr>
                 <td>{{this.id}}</td>
+                <td>{{this.stock}}</td>
                 <td>{{this.title}}</td>
                 <td>{{this.description}}</td>
                 <td>{{this.category_id}}</td>

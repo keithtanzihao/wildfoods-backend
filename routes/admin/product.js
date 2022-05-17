@@ -65,12 +65,10 @@ router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
     console.log("test1");
     product = product.where("title", "like", "%" + req.body.title + "%");
   }
-
   if (req.body.category_id && req.body.category_id !== "0") {
     console.log("test2");
     product = product.where("category_id", "=", req.body.category_id);
   }
-
   if (req.body.classification_id) {
     console.log("test3");
     product = product.query(function (qb) {
@@ -84,6 +82,8 @@ router.post("/", checkIfAuthenticated, catchAsync(async (req, res) => {
       ]);
     });
   }
+
+  
 
   let searchResult = await product.fetch();
 
