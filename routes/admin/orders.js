@@ -127,4 +127,31 @@ router.post("/:id/edit", async (req, res) => {
   });
 });
 
+router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
+  const product = await Order.where({
+    id: req.params.id,
+  }).fetch({
+    require: true,
+  });
+
+  res.render("product/delete", {
+    product: product.toJSON(),
+  });
+}));
+
+router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
+  const product = await Order.where({
+    id: req.params.id,
+  }).fetch({
+    require: true,
+  });
+  await product.destroy();
+  req.flash("success", [
+    {
+      message: `Successfullly deleted order ${req.params.id}`,
+    },
+  ]);
+  res.redirect("/admin/order");
+}));
+
 module.exports = router;
