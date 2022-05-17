@@ -1,0 +1,94 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div class="baseIndex__header">
+        <h1>Customer Orders</h1>
+      </div>
+
+
+      <form method="POST" class="baseIndex__search">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+
+        <div>
+          <label>User First Name</label>
+          <input type="text" name="name" class="form__input--textNum">
+        </div>
+
+        <div>
+          <label>Product Title</label>
+          <input type="text" name="title" class="form__input--textNum">
+        </div>
+
+        <div>
+          <label>Status</label>
+          <select name="status_id" class="form__input--textNum">
+            {{#each status}}
+              <option value={{id}}>{{title}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        {{!-- <div>
+          <label>Classification</label>
+          <select name="classification_id" class="form__input--textNum" multiple>
+            {{#each classification}}
+              <option value={{id}}>{{title}}</option>
+            {{/each}}
+          </select>
+        </div> --}}
+
+        <input type="submit" class="button__index--create" value="Search" />
+      </form>
+
+
+      <div class="baseIndex__ctn">
+        <table class="baseIndex__table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User Email</th>
+              <th>Product</th>
+              <th>Image</th>
+              <th>Purchase Date</th>
+              <th>Order Ref</th>
+              <th>Quantity</th>
+              <th>Cost</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each order}}
+              <tr>
+                <td>{{this.id}}</td>
+                <td><p>{{this.user.first_name}}</p><p>{{this.user.last_name}}</p></td>
+                <td>{{this.product.title}}</td>
+                <td><img class="baseIndex__img" src={{this.product.img_url}}></td>
+                <td>{{this.order_date}}</td>
+                <td class="td__wordBreak">{{this.order_ref}}</td>
+                <td>{{this.quantity}}</td>
+                <td>{{this.total_cost}}</td>
+                <td>{{this.status.title}}</td>
+                <td>
+                  <a
+                    class="button__index--edit"
+                    href="/admin/order/{{this.id}}/edit"
+                  >Edit</a>
+                  <a
+                    class="button__index--delete"
+                    href="/admin/order/{{this.id}}/delete"
+                  >Delete</a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  {{/block}}
+
+{{/extends}}
