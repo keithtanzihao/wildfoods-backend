@@ -1,0 +1,17 @@
+{{#extends "base"}}
+
+  {{#block "content"}}
+    <section class="baseIndex">
+
+      <div>
+        <h1>Error {{statusCode}}</h1>
+      </div>
+
+      <div>
+        {{err.message}}
+      </div>
+
+    </section>
+  {{/block}}
+
+{{/extends}}
