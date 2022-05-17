@@ -6,6 +6,8 @@ const {
   Category,
   Classification,
   ProductIngredient,
+  Cart,
+  Order
 } = require("../../models");
 
 const {
@@ -288,9 +290,33 @@ router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
     require: true,
   });
 
-  res.render("product/delete", {
-    product: product.toJSON(),
-  });
+  const cart = await Cart.where({
+    product_id: req.params.id,
+  }).fetch({
+    require: false,
+  })
+
+  const order = await Order.where({
+    product_id: req.params.id,
+  }).fetch({
+    require: false,
+  })
+
+  if (cart !== null || order !== null) {
+    req.flash("error", [
+      {
+        message: `Error: Product exist in either Cart / Order`,
+      },
+    ]);
+    res.redirect("/admin/product");
+
+  } else {
+    res.render("product/delete", {
+      product: product.toJSON(),
+    });
+  }
+
+  
 }));
 
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
