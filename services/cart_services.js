@@ -11,8 +11,10 @@ class CartServices {
 
   async addToCart(productId, quantity) {
     // todo: check if there is enough stock
-
+    const productQuantity = cartDataLayer.getQuantity(productId);
+    console.log(productQuantity);
     // todo: check if the currently logged in user
+
     // have already added the item to the cart
 
     let cartItem = await cartDataLayer.getCartItemByUserAndProduct(

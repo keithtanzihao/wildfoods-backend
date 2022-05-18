@@ -37,7 +37,6 @@ router.put(
       req.params.product_id,
       req.body.quantity
     );
-
     res.status(200).send(updatedCartItem);
   }
 );

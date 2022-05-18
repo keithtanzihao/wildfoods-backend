@@ -1,4 +1,4 @@
-const { Cart } = require("../models");
+const { Cart, Product } = require("../models");
 
 async function getCart(user_id) {
   return Cart.collection().where({
@@ -6,6 +6,14 @@ async function getCart(user_id) {
   }).fetch({
     require: false,
     withRelated: ["product"]
+  })
+}
+
+async function getQuantity(product_id) {
+  return Product.collection().query(function(qb) {
+    qb.where("id", "=", product_id).column("stock");
+  }).fetch({
+    require: true
   })
 }
 
@@ -29,9 +37,7 @@ async function createCartItem(user_id, product_id, quantity) {
 }
 
 async function updateCartItemQuantity(user_id, product_id, quantity) {
-  console.log("----------- 2 -----------");
   let cartItem = await getCartItemByUserAndProduct(user_id, product_id);
-  console.log("----------- 3 -----------");
   cartItem.set('quantity', quantity);
   await cartItem.save();
   return cartItem;
@@ -44,6 +50,7 @@ async function removeFromCart(user_id, product_id) {
 
 module.exports = {
   getCart,
+  getQuantity,
   createCartItem,
   getCartItemByUserAndProduct,
   updateCartItemQuantity,

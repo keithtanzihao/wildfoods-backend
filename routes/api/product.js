@@ -37,7 +37,7 @@ router.get("/page/:page_number", async (req, res) => {
     }
 
   }).fetchPage({
-    pageSize: 4,
+    pageSize: 6,
     page: req.params.page_number
   })
 
