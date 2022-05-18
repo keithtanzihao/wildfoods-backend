@@ -6,10 +6,6 @@ const jwt = require("jsonwebtoken");
 const { User, BlacklistedToken } = require("../../models");
 const { getHashedPassword, generateAccessToken, checkIfAuthenticatedJWT } = require("../../utility");
 
-/**
- * ROUTES ALREADY WORK BUT ILL NEED TO APPLY THEM TO FRONTEND
- */
-
 
 router.post("/register", async (req, res) => {
   const existingUser = await User.query(function (qb) {
@@ -37,6 +33,7 @@ router.post("/register", async (req, res) => {
   }
 })
 
+
 router.post("/login", async (req, res) => {
   let user = await User.where({
     email: req.body.email,
@@ -62,37 +59,42 @@ router.post("/login", async (req, res) => {
   }
 });
 
+
 // To get new TOKEN_SECRET using REFRESH_TOKEN_SECRET
 router.post('/refresh', async (req, res) => {
-  console.log(" backend ----------------- testing 1")
-  let refreshToken = req.body.refreshToken;
+  let { refreshToken } = req.body;
   if (!refreshToken) {
     res.sendStatus(401);
   }
 
-
-  // check if the refresh token has been black listed
   let blacklistedToken = await BlacklistedToken.where({
     'token': refreshToken
   }).fetch({
     require: false
   })
 
-  // if the refresh token has already been blacklisted
   if (blacklistedToken) {
     res.status(401);
-    return res.send('The refresh token has already expired')
-  }
+    // Very high chance of error
+    // return res.send({});
+    return;
+    
 
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-    if (err) {
-      return res.sendStatus(403);
-    }
-    let accessToken = generateAccessToken(user, process.env.TOKEN_SECRET, '15m');
-    res.send({
-      accessToken: accessToken,
-    });
-  })
+  } else {
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      console.log("-------------------------");
+      console.log(user);
+      console.log("-------------------------");
+      if (err) {
+        return res.sendStatus(403);
+      }
+      let accessToken = generateAccessToken(user, process.env.TOKEN_SECRET, '15m');
+      res.send({
+        accessToken,
+        refreshToken
+      });
+    })
+  }
 })
 
 router.post('/logout', async (req, res) => {

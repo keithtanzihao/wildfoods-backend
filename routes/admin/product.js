@@ -310,6 +310,17 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
+
+
+
+
+
+
+
+
+
+
 router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const product = await Product.where({
     id: req.params.id,
@@ -342,9 +353,17 @@ router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
       product: product.toJSON(),
     });
   }
-
-  
 }));
+
+
+
+
+
+
+
+
+
+
 
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const product = await Product.where({
