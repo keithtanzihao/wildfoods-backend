@@ -45,6 +45,8 @@ const checkIfAuthenticated = (req, res, next) => {
 // Authentication middleware for API
 const checkIfAuthenticatedJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
+  
+  console.log("=============================");
   console.log(authHeader)
 
   if (authHeader) {

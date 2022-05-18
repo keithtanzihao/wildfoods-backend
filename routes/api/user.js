@@ -90,8 +90,8 @@ router.post('/refresh', async (req, res) => {
       }
       let accessToken = generateAccessToken(user, process.env.TOKEN_SECRET, '15m');
       res.send({
-        accessToken,
-        refreshToken
+        accessToken: accessToken,
+        refreshToken: req.body.refreshToken
       });
     })
   }
