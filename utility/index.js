@@ -10,6 +10,7 @@ const getHashedPassword = (password) => {
   return crypto.createHash("sha256").update(password).digest("base64"); 
 }
 
+
 // json web token for api user login 
 const generateAccessToken = (user, secret, expiresIn) => {
   return jwt.sign({
@@ -19,6 +20,7 @@ const generateAccessToken = (user, secret, expiresIn) => {
       expiresIn: expiresIn
   });
 }
+
 
 const checkIfLogin = (req, res, next) => {
   if (req.session.staff) {
@@ -31,6 +33,7 @@ const checkIfLogin = (req, res, next) => {
   }
 }
 
+
 const checkIfAuthenticated = (req, res, next) => {
   if (req.session.staff) {
     next();
@@ -42,13 +45,10 @@ const checkIfAuthenticated = (req, res, next) => {
   }
 }
 
+
 // Authentication middleware for API
 const checkIfAuthenticatedJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  
-  console.log("=============================");
-  console.log(authHeader)
-
   if (authHeader) {
       const token = authHeader.split(' ')[1];
 
@@ -64,12 +64,11 @@ const checkIfAuthenticatedJWT = (req, res, next) => {
   }
 };
 
+
 module.exports = {
   getHashedPassword,
   generateAccessToken,
-
   checkIfAuthenticatedJWT,
-
   checkIfAuthenticated,
   checkIfLogin
 }

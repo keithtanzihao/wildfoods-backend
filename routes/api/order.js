@@ -7,7 +7,7 @@ const { getStatusID, calculateCost } = require("../../dal/order_dal");
 
 const { checkIfAuthenticatedJWT } = require("../../utility");
 
-router.get("/user/:user_id", async function (req, res) {
+router.get("/user/:user_id", checkIfAuthenticatedJWT, async function (req, res) {
   const order = new OrderServices(req.params.user_id);
   let orderItems = await order.getOrders();
   res.status(200).send(orderItems.toJSON());
