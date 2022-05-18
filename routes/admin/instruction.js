@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
 const { Instruction, Recipie } = require("../../models");
 const { createInstructionForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility");
 
-// Get all data from instruction table
+
 router.get("/", checkIfAuthenticated, async (req, res) => {
   const instruction = await Instruction.collection().fetch();
   res.render("instruction/index", {
@@ -14,12 +13,10 @@ router.get("/", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/create", checkIfAuthenticated, async (req, res) => {
   const allRecipie = await Recipie.fetchAll().map((recipie) => {
     return [recipie.get("id"), recipie.get("title")];
   });
-
   const instructionForm = createInstructionForm(allRecipie);
   res.render("instruction/create", {
     form: instructionForm.toHTML(addScssValidations),
@@ -27,12 +24,10 @@ router.get("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.post("/create", checkIfAuthenticated, async (req, res) => {
   const allRecipie = await Recipie.fetchAll().map((recipie) => {
     return [recipie.get("id"), recipie.get("title")];
   });
-
   const instructionForm = createInstructionForm(allRecipie);
   instructionForm.handle(req, {
     success: async (form) => {
@@ -52,30 +47,25 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
   const allRecipie = await Recipie.fetchAll().map((recipie) => {
     return [recipie.get("id"), recipie.get("title")];
   });
-
   const instruction = await Instruction.where({
     id: req.params.id,
   }).fetch({
     require: true,
     withRelated: ["recipie"],
   });
-
   const instructionForm = createInstructionForm(allRecipie);
   Object.keys(instructionForm.fields).map((key) => {
     instructionForm.fields[key].value = instruction.get(key);
   });
-
   res.render("instruction/edit", {
     form: instructionForm.toHTML(addScssValidations),
     instruction: instruction.toJSON(),
   });
 });
-
 
 
 router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
@@ -85,7 +75,6 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
     require: true,
     withRelated: ["recipie"],
   });
-
   const instructionForm = createInstructionForm();
   instructionForm.handle(req, {
     success: async (form) => {
@@ -105,7 +94,6 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
   const instruction = await Instruction.where({
     id: req.params.id,
@@ -116,7 +104,6 @@ router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
     instruction: instruction.toJSON(),
   });
 });
-
 
 
 router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
@@ -131,5 +118,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
   }]);
   res.redirect("/admin/instruction");
 });
+
 
 module.exports = router;

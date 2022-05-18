@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
+
 const { RecipieIngredient, Recipie } = require("../../models");
 const { createRecipieIngredientForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility");
 
-// Get all data from recipieIngredient table
+
 router.get("/", checkIfAuthenticated, async (req, res) => {
   const recipieIngredient = await RecipieIngredient.collection().fetch();
   res.render("recipieIngredient/index", {
@@ -14,12 +15,10 @@ router.get("/", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/create", checkIfAuthenticated, async (req, res) => {
   const allRecipie = await Recipie.fetchAll().map((recipie) => {
     return [recipie.get("id"), recipie.get("title")];
   });
-
   const recipieIngredientForm = createRecipieIngredientForm(allRecipie);
   res.render("recipieIngredient/create", {
     form: recipieIngredientForm.toHTML(addScssValidations),
@@ -27,12 +26,10 @@ router.get("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.post("/create", checkIfAuthenticated, async (req, res) => {
   const allRecipie = await Recipie.fetchAll().map((recipie) => {
     return [recipie.get("id"), recipie.get("title")];
   });
-
   const recipieIngredientForm = createRecipieIngredientForm(allRecipie);
   recipieIngredientForm.handle(req, {
     success: async (form) => {
@@ -52,30 +49,25 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
   const allRecipie = await Recipie.fetchAll().map((recipie) => {
     return [recipie.get("id"), recipie.get("title")];
   });
-
   const recipieIngredient = await RecipieIngredient.where({
     id: req.params.id,
   }).fetch({
     require: true,
     withRelated: ["recipie"],
   });
-
   const recipieIngredientForm = createRecipieIngredientForm(allRecipie);
   Object.keys(recipieIngredientForm.fields).map((key) => {
     recipieIngredientForm.fields[key].value = recipieIngredient.get(key);
   });
-
   res.render("recipieIngredient/edit", {
     form: recipieIngredientForm.toHTML(addScssValidations),
     recipieIngredient: recipieIngredient.toJSON(),
   });
 });
-
 
 
 router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
@@ -85,7 +77,6 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
     require: true,
     withRelated: ["recipie"],
   });
-
   const recipieIngredientForm = createRecipieIngredientForm();
   recipieIngredientForm.handle(req, {
     success: async (form) => {
@@ -105,7 +96,6 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
   const recipieIngredient = await RecipieIngredient.where({
     id: req.params.id,
@@ -116,7 +106,6 @@ router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
     recipieIngredient: recipieIngredient.toJSON(),
   });
 });
-
 
 
 router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
@@ -131,5 +120,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
   }]);
   res.redirect("/admin/recipieIngredient");
 });
+
 
 module.exports = router;

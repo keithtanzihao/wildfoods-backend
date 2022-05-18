@@ -3,7 +3,8 @@ const router = express.Router();
 const { Category } = require("../../models");
 const { createCategoryForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility/");
-const { ExpressError, catchAsync } = require("../../utility/expressError");
+const { catchAsync } = require("../../utility/expressError");
+
 
 router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const category = await Category.collection().fetch();
@@ -12,12 +13,14 @@ router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const categoryForm = createCategoryForm();
   res.render("category/create", {
     form: categoryForm.toHTML(addScssValidations),
   });
 }));
+
 
 router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const categoryForm = createCategoryForm();
@@ -39,6 +42,7 @@ router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const category = await Category.where({
     id: req.params.id,
@@ -51,8 +55,8 @@ router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
     form: categoryForm.toHTML(addScssValidations),
     category: category.toJSON(),
   });
-
 }));
+
 
 router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const category = await Category.where({
@@ -78,6 +82,7 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const category = await Category.where({
     id: req.params.id,
@@ -88,6 +93,7 @@ router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
     category: category.toJSON(),
   });
 }));
+
 
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const category = await Category.where({
@@ -101,5 +107,6 @@ router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => 
   }]);
   res.redirect("/admin/category");
 }));
+
 
 module.exports = router;

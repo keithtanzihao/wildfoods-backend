@@ -4,15 +4,16 @@ const router = express.Router();
 const { Staff } = require("../../models");
 const { createLoginForm, addScssValidations } = require("../../utility/forms");
 const { getHashedPassword, checkIfLogin } = require("../../utility");
-const { ExpressError, catchAsync } = require("../../utility/expressError");
+const { catchAsync } = require("../../utility/expressError");
 
-// Register routes
+
 router.get("/register", checkIfLogin, catchAsync(async (req, res) => {
   const staffForm = createLoginForm();
   res.render("staff/register", {
     form: staffForm.toHTML(addScssValidations),
   });
 }));
+
 
 router.post("/register", checkIfLogin, catchAsync(async (req, res) => {
   const category = await Staff.query({
@@ -23,7 +24,6 @@ router.post("/register", checkIfLogin, catchAsync(async (req, res) => {
     require: false,
   });
   const staffForm = createLoginForm();
-
   if (category) {
     req.flash("error", [
       {
@@ -55,6 +55,7 @@ router.post("/register", checkIfLogin, catchAsync(async (req, res) => {
   }
 }));
 
+
 // Login routes
 router.get("/login", checkIfLogin, catchAsync(async (req, res) => {
   const staffForm = createLoginForm();
@@ -62,6 +63,7 @@ router.get("/login", checkIfLogin, catchAsync(async (req, res) => {
     form: staffForm.toHTML(addScssValidations),
   });
 }));
+
 
 router.post("/login", catchAsync(async (req, res) => {
   const staffForm = createLoginForm();
@@ -86,7 +88,6 @@ router.post("/login", catchAsync(async (req, res) => {
             id: staff.get("id"),
             email: staff.get("email"),
           };
-
           req.flash("success", [
             {
               message: `Welome back ${staff.get("email")}`,
@@ -113,6 +114,7 @@ router.post("/login", catchAsync(async (req, res) => {
     },
   });
 }));
+
 
 router.get('/logout', (req, res) => {
   req.session.staff = null;

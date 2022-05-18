@@ -5,7 +5,7 @@ const { Recipie, Product } = require("../../models");
 const { createRecipieForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility");
 
-// Get all data from recipie table
+
 router.get("/", checkIfAuthenticated, async (req, res) => {
   const recipie = await Recipie.collection().fetch();
   res.render("recipie/index", {
@@ -14,12 +14,10 @@ router.get("/", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/create", checkIfAuthenticated, async (req, res) => {
   const allProduct = await Product.fetchAll().map((product) => {
     return [product.get("id"), product.get("title")];
   });
-
   const recipieForm = createRecipieForm(allProduct);
   res.render("recipie/create", {
     form: recipieForm.toHTML(addScssValidations),
@@ -27,12 +25,10 @@ router.get("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.post("/create", checkIfAuthenticated, async (req, res) => {
   const allProduct = await Product.fetchAll().map((product) => {
     return [product.get("id"), product.get("title")];
   });
-
   const recipieForm = createRecipieForm(allProduct);
   recipieForm.handle(req, {
     success: async (form) => {
@@ -57,12 +53,10 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
   const allProduct = await Product.fetchAll().map((product) => {
     return [product.get("id"), product.get("title")];
   });
-
   const recipie = await Recipie.where({
     id: req.params.id,
   }).fetch({
@@ -74,16 +68,13 @@ router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
   Object.keys(recipieForm.fields).map((key) => {
     recipieForm.fields[key].value = recipie.get(key);
   });
-
   let selectedProduct = await recipie.related("product").pluck("id");
   recipieForm.fields.product.value = selectedProduct;
-
   res.render("recipie/edit", {
     form: recipieForm.toHTML(addScssValidations),
     recipie: recipie.toJSON(),
   });
 });
-
 
 
 router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
@@ -120,7 +111,6 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
   const recipie = await Recipie.where({
     id: req.params.id,
@@ -131,7 +121,6 @@ router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
     recipie: recipie.toJSON(),
   });
 });
-
 
 
 router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
@@ -146,5 +135,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
   }]);
   res.redirect("/admin/recipie");
 });
+
 
 module.exports = router;

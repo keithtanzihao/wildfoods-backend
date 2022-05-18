@@ -3,9 +3,9 @@ const router = express.Router();
 const { Classification } = require("../../models");
 const { createClassificationForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility/");
-const { ExpressError, catchAsync } = require("../../utility/expressError");
+const { catchAsync } = require("../../utility/expressError");
 
-// Get all data from classification table
+
 router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.collection().fetch();
   res.render("classification/index", {
@@ -13,12 +13,14 @@ router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classificationForm = createClassificationForm();
   res.render("classification/create", {
     form: classificationForm.toHTML(addScssValidations),
   });
 }));
+
 
 router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classificationForm = createClassificationForm();
@@ -40,6 +42,7 @@ router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
     id: req.params.id,
@@ -53,6 +56,7 @@ router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
     classification: classification.toJSON(),
   });
 }));
+
 
 router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
@@ -78,6 +82,7 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
     id: req.params.id,
@@ -88,6 +93,7 @@ router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
     classification: classification.toJSON(),
   });
 }));
+
 
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const classification = await Classification.where({
@@ -101,5 +107,6 @@ router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => 
   }]);
   res.redirect("/admin/classification");
 }));
+
 
 module.exports = router;

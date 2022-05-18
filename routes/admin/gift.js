@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
 const { Gift, Product } = require("../../models");
 const { createGiftForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility");
 
-// Get all data from gift table
+
 router.get("/", checkIfAuthenticated, async (req, res) => {
   const gift = await Gift.collection().fetch();
   res.render("gift/index", {
@@ -14,14 +13,12 @@ router.get("/", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/create", checkIfAuthenticated, async (req, res) => {
   const allProduct = await Product.fetchAll().map(
     (product) => {
       return [product.get("id"), product.get("title")];
     }
   );
-
   const giftForm = createGiftForm(allProduct);
   res.render("gift/create", {
     form: giftForm.toHTML(addScssValidations),
@@ -29,19 +26,16 @@ router.get("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.post("/create", checkIfAuthenticated, async (req, res) => {
   const allProduct = await Product.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
-
   const giftForm = createGiftForm(allProduct);
   giftForm.handle(req, {
     success: async (form) => {
       let { product, ...giftData } = form.data;
       const gift = new Gift(giftData);
       await gift.save();
-
       if (product) {
         await gift.product().attach(product.split(","));
       }
@@ -59,29 +53,24 @@ router.post("/create", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
   const allProduct = await Product.fetchAll().map(
     (product) => {
       return [product.get("id"), product.get("title")];
     }
   );
-
   const gift = await Gift.where({
     id: req.params.id,
   }).fetch({
     require: true,
     withRelated: ["product"],
   });
-
   const giftForm = createGiftForm(allProduct);
   Object.keys(giftForm.fields).map((key) => {
     giftForm.fields[key].value = gift.get(key);
   });
-
   let selectedProduct = await gift.related("product").pluck("id");
   giftForm.fields.product.value = selectedProduct;
-  
   res.render("gift/edit", {
     form: giftForm.toHTML(addScssValidations),
     gift: gift.toJSON(),
@@ -89,12 +78,10 @@ router.get("/:id/edit", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
   const allProduct = await Product.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
-
   const gift = await Gift.where({
     id: req.params.id,
   }).fetch({
@@ -106,7 +93,6 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
       let { product, ...giftData } = form.data;
       gift.set(giftData)
       gift.save();
-
       // Gets the job done
       if (product) {
         await gift.product().detach();
@@ -126,7 +112,6 @@ router.post("/:id/edit", checkIfAuthenticated, async (req, res) => {
 });
 
 
-
 router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
   const gift = await Gift.where({
     id: req.params.id,
@@ -137,7 +122,6 @@ router.get("/:id/delete", checkIfAuthenticated, async (req, res) => {
     gift: gift.toJSON(),
   });
 });
-
 
 
 router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
@@ -152,5 +136,6 @@ router.post("/:id/delete", checkIfAuthenticated, async (req, res) => {
   }]);
   res.redirect("/admin/gift");
 });
+
 
 module.exports = router;

@@ -3,9 +3,9 @@ const router = express.Router();
 const { ProductIngredient } = require("../../models");
 const { createProductIngredientForm, addScssValidations } = require("../../utility/forms");
 const { checkIfAuthenticated } = require("../../utility/");
-const { ExpressError, catchAsync } = require("../../utility/expressError");
+const { catchAsync } = require("../../utility/expressError");
 
-// Get all data from productIngredient table
+
 router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.collection().fetch();
   res.render("productIngredient/index", {
@@ -13,12 +13,14 @@ router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredientForm = createProductIngredientForm();
   res.render("productIngredient/create", {
     form: productIngredientForm.toHTML(addScssValidations),
   });
 }));
+
 
 router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredientForm = createProductIngredientForm();
@@ -40,6 +42,7 @@ router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
     id: req.params.id,
@@ -53,6 +56,7 @@ router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
     productIngredient: productIngredient.toJSON(),
   });
 }));
+
 
 router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
@@ -78,6 +82,7 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
     id: req.params.id,
@@ -88,6 +93,7 @@ router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
     productIngredient: productIngredient.toJSON(),
   });
 }));
+
 
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const productIngredient = await ProductIngredient.where({
@@ -101,5 +107,6 @@ router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => 
   }]);
   res.redirect("/admin/productIngredient");
 }));
+
 
 module.exports = router;

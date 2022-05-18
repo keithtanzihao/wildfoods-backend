@@ -1,12 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
 const { Media, Product } = require("../../models");
 const { createMediaForm, addScssValidations } = require("../../utility/forms");
-const { checkIfAuthenticated } = require("../../utility");
 
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
 
 router.get("/", async (req, res) => {
   const media = await Media.collection().fetch();
@@ -15,11 +11,11 @@ router.get("/", async (req, res) => {
   });
 });
 
+
 router.get("/create", async (req, res) => {
   const allProduct = await Product.fetchAll().map((product) => {
     return [product.get("id"), product.get("title")];
   });
-
   const mediaForm = createMediaForm(allProduct);
   res.render("media/create", {
     form: mediaForm.toHTML(addScssValidations),
@@ -30,11 +26,11 @@ router.get("/create", async (req, res) => {
   });
 });
 
+
 router.post("/create",  async (req, res) => {
   const allProduct = await Product.fetchAll().map((product) => {
     return [product.get("id"), product.get("title")];
   });
-
   const mediaForm = createMediaForm(allProduct);
   mediaForm.handle(req, {
     success: async (form) => {
@@ -55,20 +51,18 @@ router.post("/create",  async (req, res) => {
   });
 });
 
+
 router.get("/:id/update", async (req, res) => {
   const allProduct = await Product.fetchAll().map((product) => {
     return [product.get("id"), product.get("title")];
   });
-
   const media = await Media.where({
     id: req.params.id,
   }).fetch({
     require: true,
   });
-
   const mediaForm = createMediaForm(allProduct);
   mediaForm.set(form.data);
-
   res.render("products/update", {
     form: mediaForm.toHTML(allProduct),
     product: media.toJSON(),
@@ -77,5 +71,6 @@ router.get("/:id/update", async (req, res) => {
     cloudinaryPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
   });
 });
+
 
 module.exports = router;

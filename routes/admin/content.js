@@ -6,7 +6,7 @@ const { createContentForm, addScssValidations } = require("../../utility/forms")
 const { checkIfAuthenticated } = require("../../utility");
 const { ExpressError, catchAsync } = require("../../utility/expressError");
 
-// Get all data from content table
+
 router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.collection().fetch();
   res.render("content/index", {
@@ -14,22 +14,22 @@ router.get("/", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allProduct = await Product.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
-
   const contentForm = createContentForm(allProduct);
   res.render("content/create", {
     form: contentForm.toHTML(addScssValidations),
   });
 }));
 
+
 router.post("/create", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allProduct = await Product.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
-
   const contentForm = createContentForm(allProduct);
   contentForm.handle(req, {
     success: async (form) => {
@@ -52,23 +52,21 @@ router.get("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const allProduct = await Category.fetchAll().map(product => {
     return [product.get("id"), product.get("title")];
   })
-
   const content = await Content.where({
     id: req.params.id,
   }).fetch({
     require: true,
   });
-
   const contentForm = createContentForm(allProduct);
   Object.keys(productForm.fields).map(key => {
     productForm.fields[key].value = product.get(key);
   })
-  
   res.render("content/edit", {
     form: contentForm.toHTML(addScssValidations),
     content: content.toJSON(),
   });
 }));
+
 
 router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.where({
@@ -94,6 +92,7 @@ router.post("/:id/edit", checkIfAuthenticated, catchAsync(async (req, res) => {
   });
 }));
 
+
 router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.where({
     id: req.params.id,
@@ -104,6 +103,7 @@ router.get("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
     content: content.toJSON(),
   });
 }));
+
 
 router.post("/:id/delete", checkIfAuthenticated, catchAsync(async (req, res) => {
   const content = await Content.where({
