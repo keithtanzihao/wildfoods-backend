@@ -109,6 +109,10 @@ async function main() {
       res.redirect("/admin/login");
     }
   });
+
+  // Unable to fix Webhooks event missing error when using refactored routes
+  // KIV for now, might have missed out something really simple
+
   // app.use(express.json(), adminRoutes);
   // app.use(apiRoutes);
   
