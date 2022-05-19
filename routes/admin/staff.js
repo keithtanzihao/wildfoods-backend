@@ -75,7 +75,7 @@ router.post("/login", catchAsync(async (req, res) => {
         require: false,
       });
 
-      if (!staff.get("password")) {
+      if (!staff || !staff.get("password")) {
         req.flash("error", [
           {
             message: `Error: Wrong email/password`,
