@@ -9,9 +9,9 @@ async function getCart(user_id) {
   })
 }
 
-async function getQuantity(product_id) {
-  return Product.collection().query(function(qb) {
-    qb.where("id", "=", product_id).column("stock");
+async function getProduct(product_id) {
+  return Product.where({
+    id: product_id
   }).fetch({
     require: true
   })
@@ -50,7 +50,7 @@ async function removeFromCart(user_id, product_id) {
 
 module.exports = {
   getCart,
-  getQuantity,
+  getProduct,
   createCartItem,
   getCartItemByUserAndProduct,
   updateCartItemQuantity,

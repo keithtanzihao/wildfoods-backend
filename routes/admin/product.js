@@ -364,7 +364,7 @@ router.get(
   })
 );
 
-
+// POST
 router.post(
   "/:id/delete",
   checkIfAuthenticated,
@@ -374,13 +374,27 @@ router.post(
     }).fetch({
       require: true,
     });
-    await product.destroy();
-    req.flash("success", [
-      {
-        message: `Successfullly deleted product ${req.params.id}`,
-      },
-    ]);
-    res.redirect("/admin/product");
+    const cart = await Cart.where({
+      product_id: req.params.id,
+    }).fetch({
+      require: false,
+    });
+    const order = await Order.where({
+      product_id: req.params.id,
+    }).fetch({
+      require: false,
+    });
+    
+    if (cart !== null || order !== null) {
+      await product.destroy();
+      req.flash("success", [
+        {
+          message: `Successfullly deleted product ${req.params.id}`,
+        },
+      ]);
+      res.redirect("/admin/product");
+    }
+
   })
 );
 
