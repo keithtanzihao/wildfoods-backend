@@ -92,13 +92,13 @@ app.use(csurfErrorMiddleware);
 // const cartRoutes = require("./routes/admin/cart");
 // const orderRoutes = require("./routes/admin/orders");
 
-// const categoryAPI = require("./routes/api/category");
-// const classificationAPI = require("./routes/api/classification");
-// const productAPI = require("./routes/api/product");
-// const userAPI = require("./routes/api/user");
-// const cartAPI = require("./routes/api/cart");
+const categoryAPI = require("./routes/api/category");
+const classificationAPI = require("./routes/api/classification");
+const productAPI = require("./routes/api/product");
+const userAPI = require("./routes/api/user");
+const cartAPI = require("./routes/api/cart");
 const checkoutAPI = require("./routes/api/checkout");
-// const orderAPI = require("./routes/api/order");
+const orderAPI = require("./routes/api/order");
 
 async function main() {
   // app.get("/", function (req, res) {
@@ -109,7 +109,7 @@ async function main() {
   //   }
   // });
   app.use(express.json(), adminRoutes);
-  app.use(apiRoutes);
+  // app.use(apiRoutes);
   // app.use(errorRoutes);
   // app.use(errorRedirectMiddleware);
 
@@ -129,13 +129,13 @@ async function main() {
   // app.use("/admin/cart", express.json(), cartRoutes);
   // app.use("/admin/order", express.json(), orderRoutes);
 
-  // app.use("/category", express.json(), categoryAPI);
-  // app.use("/classification", express.json(), classificationAPI);
-  // app.use("/product", express.json(), productAPI);
-  // app.use("/user", express.json(), userAPI);
-  // app.use("/cart/", express.json(), cartAPI);
+  app.use("/category", express.json(), categoryAPI);
+  app.use("/classification", express.json(), classificationAPI);
+  app.use("/product", express.json(), productAPI);
+  app.use("/user", express.json(), userAPI);
+  app.use("/cart/", express.json(), cartAPI);
   app.use("/checkout/", checkoutAPI);
-  // app.use("/order/", express.json(), orderAPI);
+  app.use("/order/", express.json(), orderAPI);
 }
 
 main();
